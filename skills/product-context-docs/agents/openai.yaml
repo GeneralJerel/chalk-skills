@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Context Docs"
+  short_description: "Create and update repo product context docs"
+  default_prompt: "Use $product-context-docs to create or refresh /docs product and tech context."
