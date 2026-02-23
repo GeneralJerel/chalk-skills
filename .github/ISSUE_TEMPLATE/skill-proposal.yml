@@ -1,0 +1,41 @@
+name: Skill Proposal
+about: Propose a new reusable skill for chalk-skills
+labels: ["skill", "proposal"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem should this skill solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_skill
+    attributes:
+      label: Proposed Skill
+      description: Suggested skill name, purpose, and trigger examples.
+      placeholder: |
+        Name: example-skill
+        Purpose: ...
+        Trigger examples: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Proposed Workflow
+      description: Outline expected workflow steps and outputs.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contract
+    attributes:
+      label: Contract Alignment
+      options:
+        - label: This proposal is provider-agnostic.
+          required: true
+        - label: This proposal fits `docs/open-source-scope.md`.
+          required: true

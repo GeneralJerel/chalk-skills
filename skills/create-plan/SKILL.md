@@ -1,11 +1,14 @@
 ---
 name: create-plan
 description: Create a .plan.md file when the user asks to make a plan, create a plan, write a plan, or similar
+owner: chalk
+version: "1.0.0"
+metadata-version: "1"
 allowed-tools: Read, Glob, Write
 argument-hint: "[plan description]"
 ---
 
-Follow the plan creation conventions defined in `.chalk/.cursor/plans/` and `AGENTS.md`.
+Follow the plan creation conventions defined in `.chalk/.cursor/plans/` and any project `AGENTS.md` if present.
 
 ## Quick Reference
 

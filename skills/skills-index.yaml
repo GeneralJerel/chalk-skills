@@ -1,0 +1,30 @@
+metadataVersion: "1"
+skills:
+  - name: create-doc
+    path: skills/create-doc/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: create-plan
+    path: skills/create-plan/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: product-context-docs
+    path: skills/product-context-docs/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: project-skill-creator
+    path: skills/project-skill-creator/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: setup-chalk
+    path: skills/setup-chalk/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: setup-docs
+    path: skills/setup-docs/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: update-doc
+    path: skills/update-doc/SKILL.md
+    owner: chalk
+    version: "1.0.0"

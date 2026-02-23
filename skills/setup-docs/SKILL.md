@@ -1,6 +1,9 @@
 ---
 name: setup-docs
 description: Analyze the codebase and populate all .chalk/docs profile stubs with real project content. Run once after chalk init.
+owner: chalk
+version: "1.0.0"
+metadata-version: "1"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[optional: specific vertical to populate, e.g. 'engineering only']"
 ---

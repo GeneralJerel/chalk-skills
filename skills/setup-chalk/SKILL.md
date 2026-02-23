@@ -1,6 +1,9 @@
 ---
 name: setup-chalk
 description: Initialize .chalk folder with style transfer — analyze a repo and capture its architecture, coding style, tech stack, design assets, and color palette into structured docs
+owner: chalk
+version: "1.0.0"
+metadata-version: "1"
 allowed-tools: Read, Write, Glob, Grep, Shell
 argument-hint: "[optional: path to repo root, defaults to current project]"
 ---

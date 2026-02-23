@@ -1,0 +1,37 @@
+name: Skill Spec Change Request
+about: Propose a change to skill schema, ownership model, or validation rules
+labels: ["spec", "proposal"]
+body:
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Behavior/Rule
+      description: What does the current contract/rule do today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: requested
+    attributes:
+      label: Requested Change
+      description: What should change?
+    validations:
+      required: true
+
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility Impact
+      description: Is this breaking? How should migration work?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Acknowledgements
+      options:
+        - label: I reviewed docs/skill-contract.md.
+          required: true
+        - label: I reviewed docs/open-source-scope.md.
+          required: true

@@ -1,6 +1,9 @@
 ---
 name: create-doc
 description: Create a new doc file in .chalk/docs/ when the user asks to create, write, or add documentation
+owner: chalk
+version: "1.0.0"
+metadata-version: "1"
 allowed-tools: Read, Glob, Write
 argument-hint: "[doc description]"
 ---

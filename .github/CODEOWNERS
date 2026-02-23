@@ -1,0 +1,9 @@
+# Default ownership
+* @chalk-pm/maintainers
+
+# Skill contract and validation require maintainer review
+/skills/ @chalk-pm/maintainers
+/scripts/validate-skills.sh @chalk-pm/maintainers
+/docs/skill-contract.md @chalk-pm/maintainers
+/docs/open-source-scope.md @chalk-pm/maintainers
+/docs/versioning.md @chalk-pm/maintainers
