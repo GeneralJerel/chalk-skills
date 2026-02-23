@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a Question
+    url: https://github.com/GeneralJerel/chalk-skills/discussions
+    about: Use Discussions for usage questions and design discussions.
+  - name: Security Report
+    url: https://github.com/GeneralJerel/chalk-skills/security/policy
+    about: Report vulnerabilities through the Security policy process.

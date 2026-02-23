@@ -161,6 +161,16 @@ Skills produce and maintain the `.chalk/` documentation structure:
 - Versioning policy: `docs/versioning.md`
 - Review checklist: `docs/review-checklist.md`
 
+## Quickstart (Contributors)
+
+```bash
+# validate all skills
+make validate
+
+# scaffold a new skill
+make init-skill NAME=my-skill DESC="what it does and when to use it" OWNER=project
+```
+
 ## Adding a New Skill
 
 1. Create a folder: `skills/<skill-name>/`
