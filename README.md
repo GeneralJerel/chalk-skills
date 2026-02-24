@@ -170,7 +170,6 @@ make validate
 # scaffold a new skill
 make init-skill NAME=my-skill DESC="what it does and when to use it" OWNER=project
 ```
-
 ## Adding a New Skill
 
 1. Create a folder: `skills/<skill-name>/`
