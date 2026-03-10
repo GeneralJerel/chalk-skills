@@ -151,6 +151,7 @@ erDiagram
         decimal unit_price
         timestamp created_at
         timestamp updated_at
+        timestamp deleted_at
     }
 ```
 

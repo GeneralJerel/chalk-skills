@@ -62,17 +62,17 @@ Track, categorize, and prioritize technical debt using a structured register. Th
    - **Coupling to upcoming work**: If you are already changing the affected area, fix the debt now (lowest marginal cost)
    - **Risk**: Debt that could cause incidents or data loss gets a priority boost regardless of effort
 
-7. **Write or update the register** -- Save to `.chalk/docs/engineering/<n>_tech_debt_register.md`. If updating an existing register, preserve history (do not delete resolved items; mark them as resolved with the date).
+7. **Write or update the register** -- Save to `.chalk/docs/engineering/tech_debt_register.md`. If updating an existing register, preserve history (do not delete resolved items; mark them as resolved with the date).
 
 8. **Summarize** -- Tell the user what was added/changed, the current top 5 priorities, and any items that align with upcoming work.
 
 ## Filename Convention
 
 ```
-<number>_tech_debt_register.md
+tech_debt_register.md
 ```
 
-A project should have exactly one tech debt register. If one already exists, update it instead of creating a new one.
+A project should have exactly one tech debt register at a fixed path (e.g., `.chalk/docs/engineering/tech_debt_register.md`). If one already exists, update it instead of creating a new one.
 
 ## Tech Debt Register Format
 
