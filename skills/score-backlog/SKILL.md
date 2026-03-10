@@ -80,8 +80,8 @@ Last updated: <YYYY-MM-DD> (Initial draft)
 
 ### Dimension Definitions
 
-| Dimension | Scale | Description |
-|-----------|-------|-------------|
+| Dimension | Scale (Units/Range) | Description |
+|-----------|---------------------|-------------|
 | Reach | users/quarter | Number of users who will encounter this per quarter |
 | Impact | 0.25x - 3x | Degree of change for each affected user |
 | Confidence | 20% - 100% | Certainty about Reach and Impact estimates |
