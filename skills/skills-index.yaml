@@ -1,6 +1,6 @@
 metadataVersion: "1"
 skills:
-  # --- Phase 0: Foundation (existing) ---
+  # --- Phase 0: Foundation ---
   - name: create-doc
     path: skills/create-doc/SKILL.md
     owner: chalk
@@ -30,42 +30,6 @@ skills:
     owner: chalk
     version: "1.0.0"
 
-  # --- Phase 1: Discovery & Research ---
-  - name: create-interview-guide
-    path: skills/create-interview-guide/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: synthesize-research
-    path: skills/synthesize-research/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: analyze-competitors
-    path: skills/analyze-competitors/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-jtbd-canvas
-    path: skills/create-jtbd-canvas/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Phase 2: Definition & Strategy ---
-  - name: create-ost
-    path: skills/create-ost/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: score-backlog
-    path: skills/score-backlog/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-roadmap
-    path: skills/create-roadmap/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-metrics-framework
-    path: skills/create-metrics-framework/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
   # --- Phase 3: Design & Specification ---
   - name: create-prd
     path: skills/create-prd/SKILL.md
@@ -79,34 +43,10 @@ skills:
     path: skills/create-user-stories/SKILL.md
     owner: chalk
     version: "1.0.0"
-  - name: create-shape-up-pitch
-    path: skills/create-shape-up-pitch/SKILL.md
-    owner: chalk
-    version: "1.0.0"
 
   # --- Phase 4: Architecture & Technical Design ---
   - name: create-adr
     path: skills/create-adr/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-rfc
-    path: skills/create-rfc/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-api-design
-    path: skills/create-api-design/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: audit-api-consistency
-    path: skills/audit-api-consistency/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-data-model
-    path: skills/create-data-model/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-threat-model
-    path: skills/create-threat-model/SKILL.md
     owner: chalk
     version: "1.0.0"
 
@@ -119,14 +59,6 @@ skills:
     path: skills/create-test-plan/SKILL.md
     owner: chalk
     version: "1.0.0"
-  - name: validate-test-coverage
-    path: skills/validate-test-coverage/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-feature-flag-plan
-    path: skills/create-feature-flag-plan/SKILL.md
-    owner: chalk
-    version: "1.0.0"
 
   # --- Phase 6: Development & Delivery ---
   - name: create-pr-description
@@ -137,165 +69,9 @@ skills:
     path: skills/review-code/SKILL.md
     owner: chalk
     version: "1.0.0"
-  - name: create-commit-message
-    path: skills/create-commit-message/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: debug-systematic
-    path: skills/debug-systematic/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: manage-tech-debt
-    path: skills/manage-tech-debt/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: analyze-dependencies
-    path: skills/analyze-dependencies/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Phase 7: Quality & Testing ---
-  - name: triage-bugs
-    path: skills/triage-bugs/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-bug-report
-    path: skills/create-bug-report/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: audit-accessibility
-    path: skills/audit-accessibility/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: audit-performance
-    path: skills/audit-performance/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: audit-security
-    path: skills/audit-security/SKILL.md
-    owner: chalk
-    version: "1.0.0"
 
   # --- Phase 8: Launch & Release ---
   - name: create-release-checklist
     path: skills/create-release-checklist/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-release-notes
-    path: skills/create-release-notes/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-gtm-brief
-    path: skills/create-gtm-brief/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-rollback-plan
-    path: skills/create-rollback-plan/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Phase 9: Post-Launch ---
-  - name: create-incident-report
-    path: skills/create-incident-report/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-postmortem
-    path: skills/create-postmortem/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: synthesize-feedback
-    path: skills/synthesize-feedback/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Phase 10: Iteration ---
-  - name: create-retro
-    path: skills/create-retro/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: analyze-metrics
-    path: skills/analyze-metrics/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-experiment-design
-    path: skills/create-experiment-design/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Cross-Cutting ---
-  - name: create-stakeholder-update
-    path: skills/create-stakeholder-update/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-decision-log
-    path: skills/create-decision-log/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-runbook
-    path: skills/create-runbook/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: create-onboarding-guide
-    path: skills/create-onboarding-guide/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: validate-skill-coverage
-    path: skills/validate-skill-coverage/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Tier 3: React/TypeScript Pack ---
-  - name: react-component-patterns
-    path: skills/react-component-patterns/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: react-hook-patterns
-    path: skills/react-hook-patterns/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: react-performance-audit
-    path: skills/react-performance-audit/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Tier 3: Next.js Pack ---
-  - name: nextjs-app-router-patterns
-    path: skills/nextjs-app-router-patterns/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: nextjs-api-patterns
-    path: skills/nextjs-api-patterns/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: nextjs-performance
-    path: skills/nextjs-performance/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Tier 3: Flutter/Dart Pack ---
-  - name: flutter-widget-patterns
-    path: skills/flutter-widget-patterns/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: flutter-state-management
-    path: skills/flutter-state-management/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: flutter-platform-patterns
-    path: skills/flutter-platform-patterns/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-
-  # --- Tier 3: FastAPI/Python Pack ---
-  - name: fastapi-endpoint-patterns
-    path: skills/fastapi-endpoint-patterns/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: python-clean-architecture
-    path: skills/python-clean-architecture/SKILL.md
-    owner: chalk
-    version: "1.0.0"
-  - name: python-testing-patterns
-    path: skills/python-testing-patterns/SKILL.md
     owner: chalk
     version: "1.0.0"

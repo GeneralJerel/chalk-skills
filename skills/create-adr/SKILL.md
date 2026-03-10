@@ -50,8 +50,6 @@ Examples:
 ```markdown
 # ADR-<number>: <Decision Title>
 
-Last updated: <YYYY-MM-DD>
-
 ## Status
 
 <Proposed | Accepted | Deprecated | Superseded by [ADR-X](link)>
