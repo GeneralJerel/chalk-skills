@@ -1,11 +1,11 @@
 ---
 name: create-review
-description: Bootstrap a local AI review pipeline and generate a paste-ready review prompt for any provider (Codex, Gemini, GPT, Claude, etc.). Use after creating a handoff or when ready to get an AI code review.
+description: Bootstrap a local AI review pipeline and generate a paste-ready review prompt for any reviewer agent. Use after creating a handoff or when ready to get an AI code review.
 owner: chalk
-version: "1.0.0"
+version: "1.1.0"
 metadata-version: "1"
 allowed-tools: Bash, Read, Glob, Grep, Write
-argument-hint: "[provider] e.g. codex, gemini, or omit for generic"
+argument-hint: "[reviewer-name] e.g. codex, gemini, gpt4, claude — optional, used for labeling only"
 ---
 
 # Create Review
@@ -134,12 +134,8 @@ mkdir -p "$(dirname "$OUTPUT_PATH")"
   echo "# $REVIEWER_TITLE Review Request"
   echo
 
-  # Use provider-specific template if available, else generic
-  TEMPLATE="$ROOT_DIR/templates/${REVIEWER}-review.template.md"
-  if [ ! -f "$TEMPLATE" ]; then
-    TEMPLATE="$ROOT_DIR/templates/generic-review.template.md"
-  fi
-
+  # Use the universal reviewer template
+  TEMPLATE="$ROOT_DIR/templates/reviewer.template.md"
   if [ -f "$TEMPLATE" ]; then
     cat "$TEMPLATE"
   fi
@@ -194,93 +190,49 @@ if [ "$COPIED" -eq 0 ]; then
 fi
 ```
 
-### Create `.chalk/reviews/templates/generic-review.template.md`
+### Create `.chalk/reviews/templates/reviewer.template.md`
 
 Only create if it does not already exist (preserve user customizations):
 
 ```markdown
 You are acting as an independent code reviewer.
 
-Task:
-- Review the diff only.
-- Report defects and risks, not style preferences.
-
-Output format:
-1. Findings (highest severity first)
-2. Open questions/assumptions
-3. Residual risks/testing gaps
-
-Finding schema:
-- Severity: P0 (critical) | P1 (high) | P2 (medium) | P3 (low)
-- File: <path>:<line>
-- Issue: concise summary
-- Failure mode: what breaks and when
-- Suggested fix: actionable next step
-
-Rules:
-- Do not suggest broad refactors unless required for correctness.
-- If no blocking issues exist, explicitly state: `No blocking findings`.
-```
-
-### Create `.chalk/reviews/templates/codex-review.template.md`
-
-Only create if it does not already exist:
-
-```markdown
-You are Codex performing an independent PR review.
-
 Primary objective:
 - Find real defects and risks in changed lines only.
 - Prioritize actionable, high-signal output over style commentary.
+- Report defects and risks, not style preferences.
 
 Output format (required):
+
 1. `## Verdict`
    - `Block merge: yes|no`
    - `Blocking findings: P0=<n>, P1=<n>`
    - If no P0/P1 findings, include exact text: `No blocking findings`.
+
 2. `## Findings`
-   - Markdown table: `ID | Severity | File:Line | Issue | Failure mode | Recommended fix | Confidence`
-   - IDs: F-001, F-002, ...
+   - Use a markdown table with columns:
+     - `ID` (R-001, R-002, ...)
+     - `Severity` (P0 = critical | P1 = high | P2 = medium | P3 = low)
+     - `Category` (Security | Correctness | Performance | Reliability | Testing)
+     - `File:Line`
+     - `Issue` — concise summary
+     - `Failure mode` — what breaks and when
+     - `Suggested fix` — actionable next step
+     - `Confidence` (0.00–1.00)
+
 3. `## Testing Gaps`
-   - Missing tests that could hide regressions.
+   - List missing tests that could hide regressions.
+
 4. `## Open Questions`
    - Only unresolved assumptions that affect correctness.
 
 Rules:
-- Focus on correctness, security, reliability, and regression risk.
-- Do not comment on formatting/import ordering/trivial naming.
-- Keep recommendations patch-oriented and specific.
-```
-
-### Create `.chalk/reviews/templates/gemini-review.template.md`
-
-Only create if it does not already exist:
-
-```markdown
-You are Gemini performing an independent PR review.
-
-Primary objective:
-- Provide a rigorous risk assessment on changed code.
-- Emphasize user impact and merge risk.
-
-Output format (required):
-1. `## Executive Summary`
-   - 2-4 sentences on overall risk.
-   - `Merge recommendation: approve|changes-requested`
-   - If no P0/P1 findings, include exact text: `No blocking findings`.
-2. `## Findings`
-   - Markdown table: `ID | Severity | Category | File:Line | Issue | Impact | Suggested fix | Confidence`
-   - IDs: G-001, G-002, ...
-   - Categories: Security | Correctness | Performance | Reliability | Testing
-3. `## Regression & Testing Gaps`
-   - Missing test coverage and risky edge cases.
-4. `## Assumptions`
-   - Only assumptions that materially affect conclusions.
-
-Rules:
 - Review changed lines only.
-- No style-only feedback.
-- Suggested fixes must be concrete and immediately actionable.
+- Focus on correctness, security, reliability, and regression risk.
+- Do not comment on formatting, import ordering, or trivial naming.
+- Do not suggest broad refactors unless required for correctness.
+- Keep recommendations patch-oriented and specific to the failure mode.
+- If no blocking issues exist, explicitly state: `No blocking findings`.
 ```
 
 ### Make scripts executable
@@ -334,12 +286,12 @@ bash .chalk/reviews/scripts/copy-prompt.sh "{reviewer}" \
 Show:
 - The prompt file path
 - Whether it was copied to clipboard
-- The reviewer template used (provider-specific or generic)
-- Suggest: paste the prompt into the target model, or run with a different provider (e.g. `/create-review gemini`)
+- Suggest: paste the prompt into any AI model (Codex, Gemini, GPT, Claude, etc.)
+- To run multiple reviews: run the skill again with a different reviewer name for labeling (e.g. `/create-review gemini`)
 
 Also mention:
-- To add a custom reviewer, create `.chalk/reviews/templates/{name}-review.template.md`
-- To review with multiple providers: run the skill again with a different argument
+- The reviewer template at `.chalk/reviews/templates/reviewer.template.md` can be customized
+- Each run with a different reviewer name creates a separate prompt file in the session directory
 
 ## Step 9: Save current session
 

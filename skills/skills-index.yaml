@@ -15,7 +15,7 @@ skills:
   - name: create-review
     path: skills/create-review/SKILL.md
     owner: chalk
-    version: "1.0.0"
+    version: "1.1.0"
   - name: fix-findings
     path: skills/fix-findings/SKILL.md
     owner: chalk
@@ -26,6 +26,10 @@ skills:
     version: "1.0.0"
   - name: product-context-docs
     path: skills/product-context-docs/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: review-changes
+    path: skills/review-changes/SKILL.md
     owner: chalk
     version: "1.0.0"
   - name: project-skill-creator
