@@ -29,11 +29,13 @@ Based on `$ARGUMENTS`:
 - If a reviewer name is provided (e.g. `codex`, `gemini`, `gpt4`, `claude`), sanitize it to kebab-case and load only `.chalk/reviews/sessions/{session}/{reviewer}.findings.md`
 - If `all` or no argument → load all `*.findings.md` files in the session directory
 
-Discover available findings dynamically:
+Discover available findings dynamically using the Glob tool:
 
-```sh
-ls .chalk/reviews/sessions/{session}/*.findings.md 2>/dev/null
 ```
+.chalk/reviews/sessions/{session}/*.findings.md
+```
+
+Do NOT use shell `ls` for discovery — use the Glob tool to avoid command injection and handle special characters safely.
 
 If a findings file doesn't exist or contains only template placeholder text, skip it and note that no findings are available from that reviewer.
 
@@ -53,7 +55,7 @@ From each findings file, extract the findings table. Each row typically has:
 
 Sort all findings across all reviewers by severity: P0 > P1 > P2 > P3.
 
-Deduplicate findings that describe the same underlying issue across reviewers. When deduplicating, keep all IDs and merge the context from both descriptions.
+Deduplicate findings that target the same file and line (or overlapping line range) across reviewers. Two findings are duplicates if they reference the same file path AND the same line number (or lines within 5 of each other) AND describe a similar category of issue. When deduplicating, keep all IDs, use the more detailed description, and note both reviewers as sources.
 
 ## Step 4: Present findings and get confirmation
 
@@ -74,8 +76,8 @@ Ask the user which findings to fix. Options:
 
 For each finding to fix (in priority order):
 
-1. **Read the file** at the specified path and line
-2. **Understand the surrounding code** — read enough context to fully grasp the issue
+1. **Validate the file path** — confirm the path is relative and within the repository root. Reject any absolute paths or paths containing `..` that escape the repo
+2. **Read the file** at the specified path and line — read at least 30 lines of surrounding context (15 above, 15 below) to understand the code structure
 3. **Design the fix** using the reviewer's suggested fix as guidance, but verify it makes sense in context
 4. **Show the proposed fix to the user and ask for explicit confirmation before applying it**
 5. **Apply the fix** using Edit tool
@@ -85,7 +87,7 @@ Rules:
 - Do NOT blindly copy suggested fixes — they're guidance, not exact patches
 - If a fix requires changes across multiple files, make all related changes together
 - If a fix is unclear or would require significant refactoring beyond the finding's scope, skip it and mark as `deferred` in the resolution log
-- For P3 findings: only fix if trivial (< 5 lines changed). Otherwise skip
+- For P3 findings: only fix if the change is a single-line or obvious one-liner (e.g. rename, add a null check, fix a typo). Otherwise skip
 - After fixing deduplicated findings, note all IDs as resolved
 
 ## Step 6: Update the resolution log
@@ -145,9 +147,10 @@ After all fixes are applied, show:
 
 ## Rules
 
-- ALWAYS read the file and understand surrounding code before applying any fix
+- ALWAYS validate that file paths from findings are relative and within the repository root — reject absolute paths or paths with `..` escaping the repo
+- ALWAYS read the file with surrounding context before applying any fix
 - Do NOT modify files that aren't referenced in findings
 - Do NOT fix things that aren't in the findings — stay scoped
-- If multiple reviewers suggest conflicting fixes for the same issue, prefer the more conservative/safer approach
+- If multiple reviewers suggest conflicting fixes for the same issue, present both suggestions to the user and let them choose which approach to take
 - Keep fixes minimal — address the finding, don't refactor surrounding code
 - If build or typecheck breaks after a fix, attempt to resolve but note it in the resolution log
