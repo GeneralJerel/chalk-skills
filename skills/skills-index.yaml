@@ -4,8 +4,20 @@ skills:
     path: skills/create-doc/SKILL.md
     owner: chalk
     version: "1.0.0"
+  - name: create-handoff
+    path: skills/create-handoff/SKILL.md
+    owner: chalk
+    version: "1.0.0"
   - name: create-plan
     path: skills/create-plan/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: create-review
+    path: skills/create-review/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: fix-review
+    path: skills/fix-review/SKILL.md
     owner: chalk
     version: "1.0.0"
   - name: product-context-docs
