@@ -83,7 +83,7 @@ For each comment (Critical, High, and Medium severity):
 1. Read the file at `path`
 2. Understand the issue described in the comment
 3. If a `suggestion` block exists, use it as a strong hint — but verify it makes sense in context before applying blindly
-4. Apply the fix. Make sure the fix is correct and doesn't break surrounding code
+4. Show the proposed fix to the user and ask for explicit confirmation before applying it.
 5. If a comment is unclear or the fix would require broader refactoring beyond the scope, note it and skip
 
 For Low severity: skip unless trivially fixable (one-line change).

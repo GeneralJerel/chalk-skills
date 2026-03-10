@@ -14,7 +14,7 @@ Bootstrap the review pipeline and generate a paste-ready review prompt for any A
 
 ## Step 1: Determine the reviewer and session
 
-**Reviewer:** If the user provided `$ARGUMENTS`, use the first argument as the reviewer name (e.g. `codex`, `gemini`, `gpt4`, `claude`). If no argument, use `generic`.
+**Reviewer:** If the user provided `$ARGUMENTS`, sanitize it to a safe kebab-case string (lowercase, strip any characters that aren't alphanumeric or hyphens, collapse multiple hyphens) and use that as the reviewer name (e.g. `codex`, `gemini`, `gpt4`, `claude`). If no argument, use `generic`.
 
 **Session:** Detect from context:
 1. If `.reviews/` exists, check for the most recent session directory
@@ -71,11 +71,11 @@ mkdir -p "$(dirname "$OUTPUT_PATH")"
   echo
   echo "## Diff Stat"
   echo '```'
-  git diff --stat "$MERGE_BASE"...HEAD 2>/dev/null || echo "(no committed diff)"
+  git diff --stat "$MERGE_BASE"..HEAD 2>/dev/null || echo "(no committed diff)"
   echo '```'
   echo
   echo "## Changed Files"
-  CHANGED="$(git diff --name-only "$MERGE_BASE"...HEAD 2>/dev/null || true)"
+  CHANGED="$(git diff --name-only "$MERGE_BASE"..HEAD 2>/dev/null || true)"
   if [ -n "$CHANGED" ]; then
     echo "$CHANGED" | while IFS= read -r f; do [ -n "$f" ] && echo "- $f"; done
   else

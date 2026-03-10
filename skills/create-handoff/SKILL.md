@@ -25,7 +25,7 @@ Derive a session name from context:
 Create the session directory and handoff file:
 
 ```sh
-SESSION_DIR=".reviews/${session-name}"
+SESSION_DIR=".reviews/${session_name}"
 HANDOFF_PATH="$SESSION_DIR/handoff.md"
 mkdir -p "$SESSION_DIR"
 ```
