@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "chalk.json",
+  "description": "Project identity and machine-readable metadata for Chalk skills. This is the single source of truth that skills read to understand a project.",
+  "type": "object",
+  "required": ["version", "project"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version",
+      "enum": ["1.0"]
+    },
+    "project": {
+      "type": "object",
+      "description": "Core project identity",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Project name (from package.json name, Cargo.toml, or directory name)"
+        },
+        "description": {
+          "type": "string",
+          "description": "One-line description (from package.json description or README)"
+        },
+        "language": {
+          "type": "string",
+          "description": "Primary language",
+          "examples": ["typescript", "javascript", "python", "go", "rust", "java"]
+        },
+        "framework": {
+          "type": "string",
+          "description": "Primary framework",
+          "examples": ["next", "vite", "react", "angular", "vue", "svelte", "electron", "django", "flask", "express", "fastapi"]
+        },
+        "type": {
+          "type": "string",
+          "description": "Application type",
+          "enum": ["web", "desktop", "mobile", "api", "library", "cli", "monorepo"]
+        }
+      }
+    },
+    "dev": {
+      "type": "object",
+      "description": "Development server configuration. Skills use this to start and connect to the running app.",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Command to start the dev server",
+          "examples": ["npm run dev", "yarn dev", "make dev", "cargo run"]
+        },
+        "port": {
+          "type": "integer",
+          "description": "Dev server port",
+          "examples": [3000, 5173, 8080, 4200]
+        },
+        "url": {
+          "type": "string",
+          "description": "Dev server URL (for apps with non-standard URLs or Electron renderer URLs)",
+          "examples": ["http://localhost:3000", "http://localhost:5173"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Any quirks about the dev setup (e.g., 'electron-vite serves renderer on separate port')"
+        }
+      }
+    },
+    "test": {
+      "type": "object",
+      "description": "Test configuration",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Command to run tests",
+          "examples": ["npm test", "pytest", "go test ./...", "cargo test"]
+        },
+        "framework": {
+          "type": "string",
+          "description": "Test framework in use",
+          "examples": ["jest", "vitest", "playwright", "pytest", "node:test", "go test"]
+        }
+      }
+    },
+    "build": {
+      "type": "object",
+      "description": "Build configuration",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Command to build for production",
+          "examples": ["npm run build", "cargo build --release"]
+        },
+        "output": {
+          "type": "string",
+          "description": "Build output directory",
+          "examples": ["dist/", "build/", "out/", "target/release/"]
+        }
+      }
+    },
+    "routes": {
+      "type": "array",
+      "description": "Application routes/pages. Skills like capture-pr-visuals use this to know what to screenshot.",
+      "items": {
+        "type": "object",
+        "required": ["path", "name"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Route path (URL path, query param, or file-based route)",
+            "examples": ["/", "/dashboard", "?home=true", "/api/users"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable page/route name",
+            "examples": ["Home", "Dashboard", "Settings"]
+          },
+          "src": {
+            "type": "string",
+            "description": "Source directory or file that implements this route",
+            "examples": ["src/pages/dashboard/", "app/dashboard/page.tsx"]
+          }
+        }
+      }
+    },
+    "sourceLayout": {
+      "type": "object",
+      "description": "Where source code lives. Helps skills place new files correctly and map changes to routes.",
+      "properties": {
+        "root": {
+          "type": "string",
+          "description": "Source root directory",
+          "examples": ["src/", "app/", "lib/"]
+        },
+        "entrypoints": {
+          "type": "object",
+          "description": "Key entry point files",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "components": {
+          "type": "string",
+          "description": "Shared components directory",
+          "examples": ["src/components/", "app/components/"]
+        },
+        "pages": {
+          "type": "string",
+          "description": "Pages/views directory",
+          "examples": ["src/pages/", "app/", "src/renderer/src/"]
+        },
+        "styles": {
+          "type": "string",
+          "description": "Styles directory",
+          "examples": ["src/styles/", "styles/"]
+        },
+        "tests": {
+          "type": "string",
+          "description": "Tests directory",
+          "examples": ["tests/", "__tests__/", "src/**/*.test.ts"]
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When chalk was initialized for this project"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When chalk.json was last updated"
+    }
+  }
+}

@@ -41,16 +41,36 @@ skills:
     path: skills/project-skill-creator/SKILL.md
     owner: chalk
     version: "1.0.0"
+  - name: capture-pr-visuals
+    path: skills/capture-pr-visuals/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: commit
+    path: skills/commit/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: create-pr
+    path: skills/create-pr/SKILL.md
+    owner: chalk
+    version: "1.0.0"
   - name: setup-chalk
     path: skills/setup-chalk/SKILL.md
     owner: chalk
-    version: "1.0.0"
+    version: "2.0.0"
   - name: setup-docs
     path: skills/setup-docs/SKILL.md
     owner: chalk
-    version: "1.0.0"
+    version: "2.0.0"
   - name: update-doc
     path: skills/update-doc/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: validate-chalk
+    path: skills/validate-chalk/SKILL.md
+    owner: chalk
+    version: "1.0.0"
+  - name: work-issue
+    path: skills/work-issue/SKILL.md
     owner: chalk
     version: "1.0.0"
 
