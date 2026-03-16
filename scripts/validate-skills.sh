@@ -39,44 +39,44 @@ validate_csv_values() {
   fi
 }
 
-validate_capabilities() {
+validate_csv_field() {
   local file="$1"
-  local value="$2"
-  local capability
+  local field="$2"
+  local value="$3"
+  local item_validator="${4:-}"
 
-  validate_csv_values "$file" "capabilities" "$value"
+  validate_csv_values "$file" "$field" "$value"
 
-  IFS=',' read -r -a items <<< "$value"
-  for capability in "${items[@]}"; do
-    capability="$(trim "$capability")"
-    [[ -z "$capability" ]] && continue
-    if [[ ! "$capability" =~ ^[a-z0-9]+([.-][a-z0-9]+)*$ ]]; then
-      echo "FAIL $file: invalid capability '$capability'"
-      FAILED=1
-    fi
-  done
+  if [[ -n "$item_validator" ]]; then
+    IFS=',' read -r -a items <<< "$value"
+    for item in "${items[@]}"; do
+      item="$(trim "$item")"
+      [[ -z "$item" ]] && continue
+      "$item_validator" "$file" "$item"
+    done
+  fi
 }
 
-validate_activation_events() {
+validate_capability_item() {
   local file="$1"
-  local value="$2"
-  local event
+  local capability="$2"
+  if [[ ! "$capability" =~ ^[a-z0-9]+([.-][a-z0-9]+)*$ ]]; then
+    echo "FAIL $file: invalid capability '$capability'"
+    FAILED=1
+  fi
+}
 
-  validate_csv_values "$file" "activation-events" "$value"
-
-  IFS=',' read -r -a items <<< "$value"
-  for event in "${items[@]}"; do
-    event="$(trim "$event")"
-    [[ -z "$event" ]] && continue
-    case "$event" in
-      user-prompt|session-start|pre-tool-use|post-tool-use|pre-compact|session-end)
-        ;;
-      *)
-        echo "FAIL $file: unsupported activation event '$event'"
-        FAILED=1
-        ;;
-    esac
-  done
+validate_activation_event_item() {
+  local file="$1"
+  local event="$2"
+  case "$event" in
+    user-prompt|session-start|pre-tool-use|post-tool-use|pre-compact|session-end)
+      ;;
+    *)
+      echo "FAIL $file: unsupported activation event '$event'"
+      FAILED=1
+      ;;
+  esac
 }
 
 if [[ ! -d "$ROOT" ]]; then
@@ -149,7 +149,7 @@ for file in "$ROOT"/*/SKILL.md; do
 
   if [[ "$metadata_version" == "2" ]]; then
     if [[ -n "$capabilities" ]]; then
-      validate_capabilities "$file" "$capabilities"
+      validate_csv_field "$file" "capabilities" "$capabilities" validate_capability_item
     fi
 
     if [[ -n "$activation_intents" ]]; then
@@ -157,7 +157,7 @@ for file in "$ROOT"/*/SKILL.md; do
     fi
 
     if [[ -n "$activation_events" ]]; then
-      validate_activation_events "$file" "$activation_events"
+      validate_csv_field "$file" "activation-events" "$activation_events" validate_activation_event_item
     fi
 
     if [[ -n "$activation_artifacts" ]]; then

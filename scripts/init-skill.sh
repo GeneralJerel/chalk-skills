@@ -181,16 +181,16 @@ mkdir -p "$SKILL_DIR"
     echo "argument-hint: \"$ARGUMENT_HINT\""
   fi
   if [[ -n "$CAPABILITIES" ]]; then
-    echo "capabilities: $CAPABILITIES"
+    echo "capabilities: \"$CAPABILITIES\""
   fi
   if [[ -n "$ACTIVATION_INTENTS" ]]; then
-    echo "activation-intents: $ACTIVATION_INTENTS"
+    echo "activation-intents: \"$ACTIVATION_INTENTS\""
   fi
   if [[ -n "$ACTIVATION_EVENTS" ]]; then
-    echo "activation-events: $ACTIVATION_EVENTS"
+    echo "activation-events: \"$ACTIVATION_EVENTS\""
   fi
   if [[ -n "$ACTIVATION_ARTIFACTS" ]]; then
-    echo "activation-artifacts: $ACTIVATION_ARTIFACTS"
+    echo "activation-artifacts: \"$ACTIVATION_ARTIFACTS\""
   fi
   if [[ -n "$RISK_LEVEL" ]]; then
     echo "risk-level: $RISK_LEVEL"

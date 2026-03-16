@@ -72,7 +72,7 @@ The runtime decides how these actions map to a specific agent. This repository o
 ## Conflict Resolution
 
 1. Highest `priority` wins.
-2. If priorities tie, the rule with the narrower path scope wins.
+2. If priorities tie, the rule with the narrower path scope wins. A rule with no `paths-any` matcher is considered the widest possible scope (matches all paths).
 3. If rules still tie, prefer the lower `risk-level`.
 4. If there is still a tie, activate no new skill and surface an audit note.
 
