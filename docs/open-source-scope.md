@@ -8,6 +8,7 @@
 
 - Skill definitions under `skills/<skill-name>/SKILL.md`
 - Shared skill metadata/index (`skills/skills-index.yaml`)
+- Provider-agnostic activation metadata and project manifest docs
 - Skill validation and quality tooling (`scripts/validate-skills.sh`)
 - Documentation for skill authoring, ownership, and versioning
 - Contributor-facing templates and governance docs
@@ -15,6 +16,7 @@
 ## Out of Scope
 
 - Chalk Browser app source code and internal orchestration internals
+- Runtime routing engines, policy daemons, and adapter execution logic
 - Closed-source runtime adapters and product-only integrations
 - Secrets, API keys, internal telemetry payloads, or private infra config
 - Vendor-specific skill metadata formats (provider-specific config files)
@@ -25,6 +27,7 @@ This repository must remain provider-agnostic:
 
 - Do not add provider-specific metadata files inside skill packages.
 - Keep skill contracts defined by `SKILL.md` frontmatter and markdown body.
+- Keep activation manifests declarative and adapter-neutral.
 - Keep tooling generic and portable across AI coding environments.
 
 ## Relationship to Chalk Browser

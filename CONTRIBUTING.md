@@ -36,6 +36,7 @@ scripts/init-skill.sh <skill-name> --description "..." --owner project --path .c
 
 - Keep `name`, folder name, and index entry aligned.
 - Include required frontmatter keys.
+- Use activation metadata only when it is provider-agnostic and reusable across projects.
 - Use `owner: chalk` for core repo skills.
 - Do not add provider-specific metadata files.
 - Keep `SKILL.md` concise and practical.
@@ -47,6 +48,7 @@ scripts/init-skill.sh <skill-name> --description "..." --owner project --path .c
 - Call out any compatibility impact.
 - Update `skills/skills-index.yaml` when adding or renaming skills.
 - Update `CHANGELOG.md` for notable user-facing behavior or contract changes.
+- Update `docs/activation-model.md` or the example manifest when changing activation semantics.
 
 ## Review Criteria
 

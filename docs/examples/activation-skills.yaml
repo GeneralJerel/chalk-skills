@@ -1,0 +1,42 @@
+version: "1"
+default-mode: audit
+rules:
+  - id: setup-chalk-from-user-prompt
+    description: Activate Chalk setup when the user asks to initialize Chalk in a repo.
+    priority: 100
+    when:
+      events: [user-prompt]
+      prompt-contains: [set up chalk, initialize chalk, bootstrap chalk]
+    activate:
+      skills: [setup-chalk]
+
+  - id: populate-chalk-docs
+    description: Activate doc population after setup or when the user asks to fill the profile docs.
+    priority: 90
+    when:
+      events: [user-prompt]
+      prompt-contains: [populate chalk docs, fill chalk docs, bootstrap profile docs]
+      paths-any: [.chalk/docs/**]
+    activate:
+      skills: [setup-docs]
+
+  - id: create-plan-from-intent
+    description: Route planning requests to the planning skill.
+    priority: 80
+    when:
+      events: [user-prompt]
+      prompt-contains: [create plan, make a plan, roadmap, approach]
+      capabilities-any: [planning.create]
+      risk-max: low
+    activate:
+      skills: [create-plan]
+
+  - id: review-pipeline-from-intent
+    description: Route explicit review requests to the review pipeline.
+    priority: 80
+    when:
+      events: [user-prompt]
+      prompt-contains: [review my changes, run review, self review]
+      paths-any: [.chalk/reviews/**]
+    activate:
+      skills: [review-changes]

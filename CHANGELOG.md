@@ -9,6 +9,8 @@ The format is inspired by Keep a Changelog and uses SemVer semantics for skill v
 ### Added
 
 - Metadata contract docs: `docs/open-source-scope.md`, `docs/skill-contract.md`
+- Activation model spec: `docs/activation-model.md`
+- Example project activation manifest: `docs/examples/activation-skills.yaml`
 - Provider-agnostic validation script: `scripts/validate-skills.sh`
 - Skill index manifest: `skills/skills-index.yaml`
 - New skill: `skills/project-skill-creator/SKILL.md`
@@ -16,7 +18,9 @@ The format is inspired by Keep a Changelog and uses SemVer semantics for skill v
 ### Changed
 
 - Standardized frontmatter across all shipped skills (`owner`, `version`, `metadata-version`)
+- Extended the frontmatter contract with provider-agnostic activation metadata (`metadata-version: "2"`)
 - Updated `README.md` for unified `.chalk/skills` architecture and ownership/version policy
+- Updated scaffolding and validation tooling for activation metadata
 
 ### Removed
 

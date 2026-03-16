@@ -82,9 +82,14 @@ name: skill-name
 description: What this skill does and when to use it
 owner: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "2"
 allowed-tools: Read, Write, Glob, Grep
 argument-hint: "[what the user passes]"
+capabilities: docs.create, docs.update
+activation-intents: create doc, update doc
+activation-events: user-prompt
+activation-artifacts: .chalk/docs/**
+risk-level: low
 ---
 
 # Skill Title
@@ -98,9 +103,14 @@ argument-hint: "[what the user passes]"
 - `description` -- Drives auto-discovery; must include **what** and **when**
 - `owner` -- `chalk` for Chalk-managed skills, `project` for project-managed skills
 - `version` -- SemVer (`major.minor.patch`) for skill behavior
-- `metadata-version` -- Skill frontmatter schema version (currently `"1"`)
+- `metadata-version` -- Skill frontmatter schema version (currently `"2"`)
 - `allowed-tools` -- Restricts the agent to only the tools it needs
 - `argument-hint` -- Shows the user what to pass after the slash command
+- `capabilities` -- Optional comma-separated capability tags for routing and indexing
+- `activation-intents` -- Optional comma-separated trigger phrases
+- `activation-events` -- Optional comma-separated neutral event names
+- `activation-artifacts` -- Optional comma-separated repo paths or globs
+- `risk-level` -- Optional side-effect hint (`low`, `medium`, `high`)
 
 ## Where Skills Live
 
@@ -111,6 +121,8 @@ Canonical runtime location:
 | `.chalk/skills/<skill-name>/` | Per-project canonical store |
 
 No provider-specific metadata files are stored in this repository. `.chalk/skills/` remains the source of truth.
+
+Project activation rules live outside individual skills. Chalk reserves `.chalk/activation/skills.yaml` as the neutral project manifest location; see `docs/activation-model.md` and `docs/examples/activation-skills.yaml`.
 
 ## The `.chalk/` Folder
 
@@ -157,6 +169,7 @@ Skills produce and maintain the `.chalk/` documentation structure:
 ## Open Source Contract
 
 - Scope and boundaries: `docs/open-source-scope.md`
+- Activation model: `docs/activation-model.md`
 - Skill metadata/compatibility contract: `docs/skill-contract.md`
 - Versioning policy: `docs/versioning.md`
 - Review checklist: `docs/review-checklist.md`
@@ -173,7 +186,7 @@ make init-skill NAME=my-skill DESC="what it does and when to use it" OWNER=proje
 ## Adding a New Skill
 
 1. Create a folder: `skills/<skill-name>/`
-2. Add a `SKILL.md` with frontmatter (`name`, `description`, `owner`, `version`, `metadata-version`; plus optional `allowed-tools`, `argument-hint`)
+2. Add a `SKILL.md` with frontmatter (`name`, `description`, `owner`, `version`, `metadata-version`; plus optional `allowed-tools`, `argument-hint`, and activation metadata)
 3. Write the workflow as numbered steps
 4. Add templates or scripts in `assets/` if needed
 5. Keep `SKILL.md` under 500 lines; use progressive disclosure for detail

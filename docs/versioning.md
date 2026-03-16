@@ -17,7 +17,8 @@ Use semantic versioning for behavior:
 
 Use this only for frontmatter schema changes.
 
-- Current value: `"1"`
+- Current value: `"2"`
+- Legacy value `"1"` is still accepted for pre-activation skills during migration
 - Bump only when required fields or field semantics change
 - Schema migrations must include:
   - migration notes
@@ -38,3 +39,4 @@ For any PR changing skill behavior:
 - Clarify wording in `setup-docs` rules only: `1.2.3 -> 1.2.4`
 - Add a new optional output section in `create-doc`: `1.2.3 -> 1.3.0`
 - Change `create-plan` output naming contract: `1.2.3 -> 2.0.0`
+- Add activation metadata support to the frontmatter schema: `metadata-version "1" -> "2"`

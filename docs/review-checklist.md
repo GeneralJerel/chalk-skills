@@ -5,6 +5,7 @@ Use this checklist for all `chalk-skills` pull requests.
 ## Contract Checks
 
 - [ ] Skill frontmatter includes required keys (`name`, `description`, `owner`, `version`, `metadata-version`)
+- [ ] Optional activation metadata is provider-agnostic and follows the documented schema
 - [ ] Skill name is kebab-case and matches folder name
 - [ ] Ownership rules are respected (`chalk-*` reserved for `owner: chalk`)
 - [ ] No provider-specific metadata files were added
