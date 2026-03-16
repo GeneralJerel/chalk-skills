@@ -1,6 +1,10 @@
 metadataVersion: "1"
 skills:
   # --- Phase 0: Foundation ---
+  - name: project-standards
+    path: skills/project-standards/SKILL.md
+    owner: chalk
+    version: "1.0.0"
   - name: create-doc
     path: skills/create-doc/SKILL.md
     owner: chalk
