@@ -3,9 +3,14 @@ name: create-review
 description: Bootstrap a local AI review pipeline and generate a paste-ready review prompt for any reviewer agent. Use after creating a handoff or when ready to get an AI code review.
 owner: chalk
 version: "1.1.0"
-metadata-version: "1"
+metadata-version: "2"
 allowed-tools: Bash, Read, Glob, Grep, Write
 argument-hint: "[reviewer-name] e.g. codex, gemini, gpt4, claude — optional, used for labeling only"
+capabilities: review.bootstrap, review.prompt.create
+activation-intents: create review, start review, generate review prompt
+activation-events: user-prompt
+activation-artifacts: .chalk/reviews/**
+risk-level: medium
 ---
 
 # Create Review

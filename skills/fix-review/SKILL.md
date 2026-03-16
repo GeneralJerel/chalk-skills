@@ -3,9 +3,14 @@ name: fix-review
 description: When the user asks to fix, address, or work on PR review comments — fetch review comments from a GitHub pull request and apply fixes to the local codebase. Requires gh CLI.
 owner: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "2"
 allowed-tools: Bash, Read, Edit, Grep, Glob, Write
 argument-hint: "[pr-number]"
+capabilities: github.review.fix, review.comments.apply
+activation-intents: fix review comments, address pr feedback, apply review fixes
+activation-events: user-prompt
+activation-artifacts: .github/**, **/*
+risk-level: high
 ---
 
 # Fix PR Review Comments

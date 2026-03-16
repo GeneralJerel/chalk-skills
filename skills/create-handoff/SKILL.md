@@ -3,9 +3,14 @@ name: create-handoff
 description: Generate a handoff document after implementation work is complete — summarizes changes, risks, and review focus areas for the review pipeline. Use when done coding and ready to hand off for review.
 owner: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "2"
 allowed-tools: Bash, Read, Glob, Grep, Write
 argument-hint: "[optional session name or issue reference]"
+capabilities: review.handoff.create, review.pipeline
+activation-intents: create handoff, write handoff, hand off changes
+activation-events: user-prompt
+activation-artifacts: .chalk/reviews/**
+risk-level: low
 ---
 
 # Create Handoff

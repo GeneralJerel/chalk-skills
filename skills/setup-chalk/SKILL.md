@@ -3,9 +3,14 @@ name: setup-chalk
 description: Initialize .chalk folder — analyze a repo and capture its architecture, coding style, tech stack, design assets, and project identity into chalk.json and structured docs
 owner: chalk
 version: "2.0.0"
-metadata-version: "1"
+metadata-version: "2"
 allowed-tools: Read, Write, Glob, Grep, Bash
 argument-hint: "[optional: path to repo root, defaults to current project]"
+capabilities: chalk.setup, chalk.docs.bootstrap
+activation-intents: set up chalk, initialize chalk, bootstrap chalk
+activation-events: user-prompt, session-start
+activation-artifacts: .chalk/**, README.md, AGENTS.md
+risk-level: medium
 ---
 
 Initialize a `.chalk/` folder for any repository. Produces a machine-readable `chalk.json` (the single source of truth for skills) and human-readable PROFILE docs covering product, engineering, design, and AI orientation.

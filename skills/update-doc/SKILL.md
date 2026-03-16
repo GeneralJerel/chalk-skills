@@ -3,9 +3,14 @@ name: update-doc
 description: Update an existing doc file in .chalk/docs/ when the user asks to update, edit, or revise documentation
 owner: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "2"
 allowed-tools: Read, Glob, Grep, Edit
 argument-hint: "[what to update and how]"
+capabilities: docs.update, chalk.docs.update
+activation-intents: update doc, revise documentation, edit chalk doc
+activation-events: user-prompt
+activation-artifacts: .chalk/docs/**
+risk-level: low
 ---
 
 Update an existing documentation file in `.chalk/docs/`.

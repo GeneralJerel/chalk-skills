@@ -3,9 +3,14 @@ name: project-skill-creator
 description: Creates project-managed skills in .chalk/skills with safe naming, ownership metadata, and versioned frontmatter.
 owner: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "2"
 allowed-tools: Read, Glob, Write
 argument-hint: "[skill name, purpose, optional triggers/examples]"
+capabilities: skills.project.create, skills.scaffold
+activation-intents: create project skill, add local skill, scaffold skill
+activation-events: user-prompt
+activation-artifacts: .chalk/skills/**
+risk-level: medium
 ---
 
 # Project Skill Creator
@@ -39,6 +44,7 @@ Create project-managed skills in `.chalk/skills` without conflicting with Chalk-
    description: <purpose/description>
    owner: project
    version: "1.0.0"
+   metadata-version: "2"
    ---
    ```
 
