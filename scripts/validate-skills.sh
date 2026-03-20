@@ -98,7 +98,10 @@ for file in "$ROOT"/*/SKILL.md; do
 
   name="$(get_frontmatter_value "$frontmatter" "name")"
   description="$(get_frontmatter_value "$frontmatter" "description")"
+  # v3 uses 'author', v1/v2 use 'owner' — accept both
   owner="$(get_frontmatter_value "$frontmatter" "owner")"
+  author="$(get_frontmatter_value "$frontmatter" "author")"
+  owner="${owner:-$author}"
   version="$(get_frontmatter_value "$frontmatter" "version")"
   metadata_version="$(get_frontmatter_value "$frontmatter" "metadata-version")"
   capabilities="$(get_frontmatter_value "$frontmatter" "capabilities")"
@@ -127,8 +130,8 @@ for file in "$ROOT"/*/SKILL.md; do
     FAILED=1
   fi
 
-  if [[ "$metadata_version" != "1" && "$metadata_version" != "2" ]]; then
-    echo "FAIL $file: metadata-version must be '1' or '2', got '$metadata_version'"
+  if [[ "$metadata_version" != "1" && "$metadata_version" != "2" && "$metadata_version" != "3" ]]; then
+    echo "FAIL $file: metadata-version must be '1', '2', or '3', got '$metadata_version'"
     FAILED=1
   fi
 
@@ -143,11 +146,11 @@ for file in "$ROOT"/*/SKILL.md; do
   fi
 
   if [[ "$metadata_version" == "1" && (-n "$capabilities" || -n "$activation_intents" || -n "$activation_events" || -n "$activation_artifacts" || -n "$risk_level") ]]; then
-    echo "FAIL $file: activation metadata requires metadata-version '2'"
+    echo "FAIL $file: activation metadata requires metadata-version '2' or '3'"
     FAILED=1
   fi
 
-  if [[ "$metadata_version" == "2" ]]; then
+  if [[ "$metadata_version" == "2" || "$metadata_version" == "3" ]]; then
     if [[ -n "$capabilities" ]]; then
       validate_csv_field "$file" "capabilities" "$capabilities" validate_capability_item
     fi
