@@ -1,10 +1,26 @@
-.vscode/**
+# Source & config — not needed in package
 src/**
 node_modules/**
+build/**
+.vscode/**
+.github/**
+
+# Build tooling
 tsconfig.json
 tsconfig.webview.json
 webpack.config.js
 tailwind.config.js
 postcss.config.js
+package-lock.json
+
+# Dev artifacts
 **/*.map
 **/*.d.ts
+**/*.ts.map
+.gitignore
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# Misc
+**/.DS_Store
