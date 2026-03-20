@@ -1,11 +1,17 @@
 ---
 name: fastapi-endpoint-patterns
 description: FastAPI endpoint design patterns — Pydantic models, dependency injection, async decisions, error handling, router organization, and pagination
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[endpoint file or pattern question]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: python, fastapi, patterns
 ---
 
 # FastAPI Endpoint Patterns

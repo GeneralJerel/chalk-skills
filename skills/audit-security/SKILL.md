@@ -1,11 +1,17 @@
 ---
 name: audit-security
 description: Perform a security audit when the user asks to check for vulnerabilities, audit security, review OWASP compliance, scan for secrets, or assess application security posture
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[codebase path, component, or specific security concern]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: audit, security, owasp
 ---
 
 # Audit Security

@@ -1,11 +1,17 @@
 ---
 name: create-gtm-brief
 description: Create a go-to-market brief with positioning, messaging, and launch plan when the user asks to plan a launch, create a GTM strategy, or write a go-to-market plan
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[feature or product to create a GTM brief for]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: product, go-to-market, strategy
 ---
 
 # Create GTM Brief

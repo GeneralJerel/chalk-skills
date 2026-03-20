@@ -1,11 +1,17 @@
 ---
 name: audit-api-consistency
 description: Audit existing API endpoints for consistency when the user asks to check API quality, review API patterns, audit endpoints, or find API inconsistencies
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[optional: specific area or endpoint pattern to audit]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: audit, api, consistency
 ---
 
 # Audit API Consistency

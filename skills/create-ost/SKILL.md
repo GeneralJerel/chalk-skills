@@ -1,11 +1,17 @@
 ---
 name: create-ost
 description: Generate an Opportunity Solution Tree mapping outcomes to opportunities, solutions, and experiments when the user asks to create an OST, map opportunities, or plan continuous discovery
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[desired outcome or metric to drive]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: planning, strategy, objectives
 ---
 
 # Create Opportunity Solution Tree

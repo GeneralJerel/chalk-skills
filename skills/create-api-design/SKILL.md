@@ -1,11 +1,17 @@
 ---
 name: create-api-design
 description: Design a REST or GraphQL API from a feature specification when the user asks to design an API, create endpoints, define an API contract, or plan API resources
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write, Grep
 argument-hint: "[feature name or resource to design API for]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: api, design, docs
 ---
 
 # Create API Design

@@ -1,11 +1,17 @@
 ---
 name: flutter-state-management
 description: Flutter state management patterns — decision tree for setState, Provider, Riverpod, and BLoC with concrete examples and testing strategies
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[state management question or file]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: flutter, state, patterns
 ---
 
 # Flutter State Management

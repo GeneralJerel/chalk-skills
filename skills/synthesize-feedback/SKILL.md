@@ -1,11 +1,17 @@
 ---
 name: synthesize-feedback
 description: Synthesize customer feedback into thematic clusters when the user asks to analyze feedback, review VoC data, or understand customer sentiment
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[feedback source or time period]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: feedback, synthesis, research
 ---
 
 # Synthesize Feedback

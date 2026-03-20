@@ -1,11 +1,17 @@
 ---
 name: create-rollback-plan
 description: Create a deployment rollback plan when the user asks to prepare a rollback strategy, plan for deployment failure, create a revert plan, or document rollback procedures for a release
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[version to deploy or deployment context]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: ops, rollback, safety
 ---
 
 # Create Rollback Plan

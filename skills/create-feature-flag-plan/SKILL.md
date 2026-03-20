@@ -1,11 +1,17 @@
 ---
 name: create-feature-flag-plan
 description: Plan progressive delivery with feature flag lifecycle management when the user asks to create a feature flag plan, rollout strategy, or progressive delivery plan
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[feature name to create a flag plan for]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: feature-flags, rollout, delivery
 ---
 
 # Create Feature Flag Plan

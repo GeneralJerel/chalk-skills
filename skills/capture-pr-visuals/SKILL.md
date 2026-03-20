@@ -1,11 +1,17 @@
 ---
 name: capture-pr-visuals
 description: Auto-capture screenshots and GIFs of the running app for PR documentation using Playwright and project context from chalk.json
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Bash, Read, Write, Glob, Grep, Edit
 argument-hint: "[optional: specific routes to capture, e.g. '/home /settings', or 'all']"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: git, pr, visuals
 ---
 
 Capture screenshots and GIFs of the running application for PR visual documentation. Reads `chalk.json` for dev server and route info, falls back to auto-discovery if chalk docs don't exist. Uses Playwright via npx.

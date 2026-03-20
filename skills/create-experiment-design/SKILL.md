@@ -1,11 +1,17 @@
 ---
 name: create-experiment-design
 description: Design a rigorous A/B test or experiment when the user asks to create an experiment, design an A/B test, or validate a hypothesis
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[hypothesis or feature to test]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: experiment, ab-test, design
 ---
 
 # Create Experiment Design

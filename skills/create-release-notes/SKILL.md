@@ -1,11 +1,17 @@
 ---
 name: create-release-notes
 description: Generate user-facing release notes when the user asks to write release notes, document a release, summarize changes for users, or prepare a changelog between versions
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[version range, e.g., v1.1.0...v1.2.0, or target version]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: release, changelog, docs
 ---
 
 # Create Release Notes

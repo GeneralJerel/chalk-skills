@@ -1,11 +1,17 @@
 ---
 name: create-retro
 description: Create a sprint or project retrospective when the user asks to run a retro, reflect on a sprint, review what happened, or do a team retrospective
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[sprint name, project name, or time period]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: retro, process, improvement
 ---
 
 # Create Retro

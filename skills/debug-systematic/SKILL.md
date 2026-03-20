@@ -1,11 +1,17 @@
 ---
 name: debug-systematic
 description: Apply a systematic four-phase debugging workflow when the user asks to debug an issue, investigate a bug, troubleshoot a problem, or find the root cause of unexpected behavior
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[bug description, error message, or issue number]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: debugging, troubleshooting, code
 ---
 
 # Systematic Debugging

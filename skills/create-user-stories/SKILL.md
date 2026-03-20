@@ -1,11 +1,17 @@
 ---
 name: create-user-stories
 description: Generate user story map with BDD acceptance criteria when the user asks to create user stories, write stories, or break down a feature into stories
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[feature name or path to PRD]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: product, user-stories, requirements
 ---
 
 # Create User Stories

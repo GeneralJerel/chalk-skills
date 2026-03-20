@@ -1,11 +1,17 @@
 ---
 name: setup-docs
 description: Analyze the codebase and populate all .chalk/docs PROFILE stubs and chalk.json with real project content. Run once after chalk init.
-owner: chalk
+author: chalk
 version: "2.0.0"
-metadata-version: "2"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write, Bash
 argument-hint: "[optional: specific vertical to populate, e.g. 'engineering only']"
+read-only: false
+destructive: false
+idempotent: true
+open-world: true
+user-invocable: true
+tags: setup, docs, bootstrap
 capabilities: chalk.docs.populate, chalk.docs.bootstrap
 activation-intents: populate chalk docs, fill chalk docs, bootstrap profile docs
 activation-events: user-prompt

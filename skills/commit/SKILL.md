@@ -1,11 +1,17 @@
 ---
 name: commit
 description: Stage and commit changes using conventional commits — analyzes diffs, groups changes, and creates well-structured commit messages
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Bash, Read, Glob, Grep
 argument-hint: "[optional: commit message or '-m message']"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: git, vcs, automation
 ---
 
 Stage files and create commits following conventional commit standards. Analyzes the diff to determine the appropriate commit type, scope, and message. Supports granular commits (splitting unrelated changes into separate commits).

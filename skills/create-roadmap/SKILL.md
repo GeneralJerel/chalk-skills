@@ -1,11 +1,17 @@
 ---
 name: create-roadmap
 description: Create a Now/Next/Later outcome-oriented roadmap when the user asks to plan a roadmap, prioritize features, or define product direction
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[product area or theme to roadmap]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: product, roadmap, planning
 ---
 
 # Create Roadmap

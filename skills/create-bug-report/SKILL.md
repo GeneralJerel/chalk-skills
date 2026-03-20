@@ -1,11 +1,17 @@
 ---
 name: create-bug-report
 description: Create a structured bug report when the user reports a bug, wants to file an issue, document a defect, or needs help writing a bug report with proper reproduction steps
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[bug description or observed behavior]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: bugs, reporting, triage
 ---
 
 # Create Bug Report

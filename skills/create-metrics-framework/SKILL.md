@@ -1,11 +1,17 @@
 ---
 name: create-metrics-framework
 description: Define a North Star metric, input metrics, and guardrail metrics when the user asks to create a metrics framework, define KPIs, or set up measurement
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[product area or business goal to build metrics around]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: metrics, measurement, kpi
 ---
 
 # Create Metrics Framework

@@ -1,11 +1,17 @@
 ---
 name: create-interview-guide
 description: Generate a Mom Test interview guide with warm-up, core, and closing questions when the user asks to prepare for customer interviews, user research, or discovery calls
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[topic or hypothesis to explore]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: hiring, interviews, process
 ---
 
 # Create Interview Guide

@@ -1,11 +1,17 @@
 ---
 name: work-issue
 description: Pick up a GitHub issue — fetch details, create a branch, and set up context for implementation
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Bash, Read, Glob, Grep
 argument-hint: "<issue number or URL>"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: git, issues, automation
 ---
 
 Start working on a GitHub issue. Fetches the issue details, creates a properly named branch, reads project context from `chalk.json`, and sets up a todo list for implementation.

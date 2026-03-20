@@ -1,11 +1,17 @@
 ---
 name: review-changes
 description: End-to-end review pipeline — creates a handoff, generates a review (self-review or paste-ready for another provider), then offers to fix findings. Use when you want to review your changes before pushing.
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "2"
+metadata-version: "3"
 allowed-tools: Bash, Read, Edit, Grep, Glob, Write
 argument-hint: "[optional session name or issue reference]"
+read-only: false
+destructive: true
+idempotent: false
+open-world: true
+user-invocable: true
+tags: review, code-quality, pipeline
 capabilities: review.orchestrate, review.pipeline
 activation-intents: review my changes, run review pipeline, self review changes
 activation-events: user-prompt, session-start

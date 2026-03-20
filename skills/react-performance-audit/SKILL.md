@@ -1,11 +1,17 @@
 ---
 name: react-performance-audit
 description: Audit React component rendering performance when the user asks to optimize React performance, fix re-renders, or improve UI speed
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep
 argument-hint: "[component path or performance concern]"
+read-only: true
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: react, performance, optimization
 ---
 
 # React Performance Audit

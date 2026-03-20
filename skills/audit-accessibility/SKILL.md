@@ -1,11 +1,17 @@
 ---
 name: audit-accessibility
 description: Audit a feature for WCAG 2.1 AA compliance using POUR principles when the user asks to check accessibility, audit a11y, or verify WCAG compliance
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[feature or component to audit for accessibility]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: audit, accessibility, a11y
 ---
 
 # Audit Accessibility

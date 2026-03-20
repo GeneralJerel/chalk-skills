@@ -1,11 +1,17 @@
 ---
 name: create-plan
 description: Create a .plan.md file when the user asks to make a plan, create a plan, write a plan, or similar
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "2"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write
 argument-hint: "[plan description]"
+read-only: false
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: planning, tasks, execution
 capabilities: planning.create, chalk.plans
 activation-intents: create plan, make a plan, plan this
 activation-events: user-prompt

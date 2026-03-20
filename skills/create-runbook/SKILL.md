@@ -1,11 +1,17 @@
 ---
 name: create-runbook
 description: Create an operational runbook when the user asks to document a procedure, write a runbook, create an ops guide, or document how to handle a specific operational task
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[service, process, or operational procedure to document]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: ops, runbook, docs
 ---
 
 # Create Runbook
