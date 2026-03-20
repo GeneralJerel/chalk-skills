@@ -3,7 +3,7 @@
   "displayName": "Chalk Skills",
   "description": "Gamified skill manager for AI agents and development workflows. Discover, craft, and level up reusable skills.",
   "version": "0.8.5",
-  "publisher": "chalk",
+  "publisher": "chalk-agents",
   "license": "MIT",
   "icon": "media/icon.png",
   "repository": {
