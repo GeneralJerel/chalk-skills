@@ -2,13 +2,17 @@
   "name": "chalk-skills",
   "displayName": "Chalk Skills",
   "description": "Gamified skill manager for AI agents and development workflows. Discover, craft, and level up reusable skills.",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "publisher": "chalk-agents",
   "license": "MIT",
   "icon": "media/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chalk-ai/chalk-skills"
+    "url": "https://github.com/GeneralJerel/chalk-skills"
+  },
+  "homepage": "https://github.com/GeneralJerel/chalk-skills#readme",
+  "bugs": {
+    "url": "https://github.com/GeneralJerel/chalk-skills/issues"
   },
   "engines": {
     "vscode": "^1.85.0"

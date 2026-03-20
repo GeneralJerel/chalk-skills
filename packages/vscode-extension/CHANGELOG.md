@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.7] - 2026-03-20
+
+### Fixed
+- Repository URL corrected to https://github.com/GeneralJerel/chalk-skills
+- Added homepage and bugs links to package.json
+
 ## [0.8.6] - 2026-03-20
 
 ### Fixed
