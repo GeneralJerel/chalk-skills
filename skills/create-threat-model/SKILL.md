@@ -1,11 +1,17 @@
 ---
 name: create-threat-model
 description: Perform STRIDE threat modeling for a system or component when the user asks to threat model, analyze security risks, or identify attack vectors
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[system or component to threat model]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: security, threat-model, design
 ---
 
 # Create Threat Model

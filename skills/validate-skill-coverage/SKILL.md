@@ -1,11 +1,17 @@
 ---
 name: validate-skill-coverage
 description: Audit which product development lifecycle phases have skills and which have gaps when the user asks to check skill coverage, audit skills, or find lifecycle gaps
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep
 argument-hint: "[optional: specific phase or lifecycle to check]"
+read-only: true
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: validation, skills, coverage
 ---
 
 # Validate Skill Coverage

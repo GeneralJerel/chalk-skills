@@ -1,0 +1,151 @@
+{
+  "name": "chalk-skills",
+  "displayName": "Chalk Skills",
+  "description": "Gamified skill manager for AI agents and development workflows. Discover, craft, and level up reusable skills.",
+  "version": "0.8.5",
+  "publisher": "chalk",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chalk-ai/chalk-skills"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Machine Learning",
+    "Other"
+  ],
+  "keywords": [
+    "skills",
+    "agents",
+    "gamification",
+    "ai",
+    "productivity"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/skills/*/SKILL.md",
+    "workspaceContains:.chalk/skills/*/SKILL.md",
+    "onCommand:chalkSkills.init",
+    "onCommand:chalkSkills.createSkill"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "chalk-skills",
+          "title": "Chalk Skills",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "chalk-skills": [
+        {
+          "id": "chalkSkillTree",
+          "name": "Skill Tree",
+          "type": "tree"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "chalkSkills.openDashboard",
+        "title": "Chalk Skills: Open Dashboard"
+      },
+      {
+        "command": "chalkSkills.openInventory",
+        "title": "Chalk Skills: Open Inventory"
+      },
+      {
+        "command": "chalkSkills.openSkillTree",
+        "title": "Chalk Skills: Open Skill Tree"
+      },
+      {
+        "command": "chalkSkills.viewSkill",
+        "title": "Chalk Skills: View Skill Card"
+      },
+      {
+        "command": "chalkSkills.refreshSkills",
+        "title": "Chalk Skills: Refresh Skills"
+      },
+      {
+        "command": "chalkSkills.recordUsage",
+        "title": "Chalk Skills: Record Skill Usage"
+      },
+      {
+        "command": "chalkSkills.autoIndex",
+        "title": "Chalk Skills: Auto-Index Skills"
+      },
+      {
+        "command": "chalkSkills.init",
+        "title": "Chalk Skills: Init — Scaffold Sample Skills"
+      },
+      {
+        "command": "chalkSkills.createSkill",
+        "title": "Chalk Skills: Create New Skill"
+      }
+    ],
+    "configuration": {
+      "title": "Chalk Skills",
+      "properties": {
+        "chalkSkills.autoRecord.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically record skill usage when an agent reads a SKILL.md file"
+        },
+        "chalkSkills.autoRecord.cooldownSeconds": {
+          "type": "number",
+          "default": 60,
+          "description": "Minimum seconds between auto-recordings of the same skill"
+        },
+        "chalkSkills.animations.level": {
+          "type": "string",
+          "default": "full",
+          "enum": [
+            "full",
+            "reduced",
+            "off"
+          ],
+          "description": "Animation intensity level for the skills dashboard"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "compile": "webpack --mode production",
+    "vscode:prepublish": "npm run clean && npm run compile",
+    "watch": "webpack --mode development --watch",
+    "dev": "webpack --mode development",
+    "lint": "eslint src --ext ts,tsx",
+    "package": "npm run clean && npm run compile && vsce package --out build/",
+    "publish": "npm run clean && npm run compile && vsce publish"
+  },
+  "dependencies": {
+    "framer-motion": "^11.18.2",
+    "gray-matter": "^4.0.3",
+    "yaml": "^2.3.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@types/vscode": "^1.85.0",
+    "autoprefixer": "^10.4.17",
+    "css-loader": "^6.9.1",
+    "mini-css-extract-plugin": "^2.7.7",
+    "postcss": "^8.4.33",
+    "postcss-loader": "^8.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "style-loader": "^3.3.4",
+    "tailwindcss": "^3.4.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

@@ -1,11 +1,17 @@
 ---
 name: create-data-model
 description: Design a data model from feature requirements when the user asks to create a schema, design database tables, model entities, plan a data layer, or create an ERD
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write, Grep
 argument-hint: "[domain or feature to model]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: data, modeling, design
 ---
 
 # Create Data Model

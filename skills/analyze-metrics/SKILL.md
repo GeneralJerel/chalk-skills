@@ -1,11 +1,17 @@
 ---
 name: analyze-metrics
 description: Analyze product metrics and identify trends when the user asks to review metrics, analyze KPIs, or assess product health
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[metric name, period, or metrics file]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: analysis, metrics, data
 ---
 
 # Analyze Metrics

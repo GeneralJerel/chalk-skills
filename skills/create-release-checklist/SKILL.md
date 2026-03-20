@@ -1,11 +1,17 @@
 ---
 name: create-release-checklist
 description: Generate a comprehensive release checklist when the user asks to prepare a release, create a release plan, or ship a version
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[version number, e.g., v1.2.0]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: release, checklist, deployment
 ---
 
 # Create Release Checklist

@@ -1,11 +1,17 @@
 ---
 name: create-onboarding-guide
 description: Create a developer onboarding guide when the user asks to write onboarding docs, create a getting started guide, document the setup process, or help new developers ramp up
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[project name, team, or specific onboarding focus]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: onboarding, docs, developer-experience
 ---
 
 # Create Onboarding Guide

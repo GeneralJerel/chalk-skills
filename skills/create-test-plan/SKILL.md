@@ -1,11 +1,17 @@
 ---
 name: create-test-plan
 description: Create a test plan when the user asks to plan testing, define test cases, create a QA strategy, write a test plan, or prepare for testing a feature
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write, Grep
 argument-hint: "[feature or component to test]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: testing, quality, planning
 ---
 
 # Create Test Plan

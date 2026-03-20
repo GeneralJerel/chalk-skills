@@ -1,11 +1,17 @@
 ---
 name: react-hook-patterns
 description: Custom React hook best practices — dependency arrays, cleanup, stale closures, TypeScript generics, composition, and extraction heuristics
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[hook file or pattern question]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: react, hooks, patterns
 ---
 
 # React Hook Patterns

@@ -1,11 +1,17 @@
 ---
 name: react-component-patterns
 description: React + TypeScript component design patterns — composition, props API design, compound components, controlled vs uncontrolled, and memoization decisions
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[component file or pattern question]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: react, components, patterns
 ---
 
 # React Component Patterns

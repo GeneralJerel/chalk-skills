@@ -1,11 +1,17 @@
 ---
 name: analyze-competitors
 description: Build a competitive positioning matrix and strategy canvas when the user asks to analyze competitors, compare products, or assess competitive landscape
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[competitor names and/or dimensions to compare]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: analysis, competitive, strategy
 ---
 
 # Analyze Competitors

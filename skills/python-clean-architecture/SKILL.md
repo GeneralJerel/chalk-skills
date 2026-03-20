@@ -1,11 +1,17 @@
 ---
 name: python-clean-architecture
 description: Clean architecture patterns for Python services — service layer, repository pattern, domain models, dependency injection, error hierarchy, and testing strategy
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[file path or architecture question]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: python, architecture, patterns
 ---
 
 # Python Clean Architecture

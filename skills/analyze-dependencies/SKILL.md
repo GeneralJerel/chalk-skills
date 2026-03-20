@@ -1,11 +1,17 @@
 ---
 name: analyze-dependencies
 description: Audit project dependencies for risk when the user asks to check dependencies, audit packages, review dependency health, check for vulnerabilities, or assess supply chain risk
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[package manager file or specific dependency to analyze]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: analysis, dependencies, maintenance
 ---
 
 # Analyze Dependencies

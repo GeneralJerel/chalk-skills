@@ -1,11 +1,17 @@
 ---
 name: flutter-platform-patterns
 description: Guide platform-adaptive UI and native integration patterns when the user asks about Flutter platform differences, responsive layouts, or platform channels
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep
 argument-hint: "[platform concern, widget, or integration need]"
+read-only: true
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: flutter, mobile, patterns
 ---
 
 # Flutter Platform Patterns

@@ -1,11 +1,17 @@
 ---
 name: create-shape-up-pitch
 description: Write a Shape Up pitch with problem, appetite, solution sketch, rabbit holes, and no-gos when the user asks to pitch a feature, shape work, or write a Shape Up proposal
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[feature or problem to pitch]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: product, shape-up, planning
 ---
 
 # Create Shape Up Pitch

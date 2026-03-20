@@ -1,11 +1,17 @@
 ---
 name: project-standards
 description: "Infer or manually add organizational standards, best practices, and coding rules — creates and maintains .chalk/docs/engineering/project-standards.md as the single source of truth for team conventions and guidelines"
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Write, Edit, Glob, Grep
 argument-hint: "[optional: 'infer' to auto-detect, or a standard/rule to add]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: standards, conventions, quality
 ---
 
 # Project Standards

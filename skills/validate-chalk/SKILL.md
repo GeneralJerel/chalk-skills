@@ -1,11 +1,17 @@
 ---
 name: validate-chalk
 description: Validate chalk.json schema and docs completeness — check that project context is sufficient for skills to operate
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[optional: 'fix' to auto-fix issues, or 'json' for machine-readable output]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: validation, chalk, quality
 ---
 
 Audit the `.chalk/` directory to verify that `chalk.json` and PROFILE docs are complete, correct, and sufficient for skills to operate. Reports gaps and optionally fixes them.

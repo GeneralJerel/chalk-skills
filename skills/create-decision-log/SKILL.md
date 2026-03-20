@@ -1,11 +1,17 @@
 ---
 name: create-decision-log
 description: Record a product or engineering decision with full context when the user asks to log a decision, record a choice, or document why something was decided
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[decision topic or question]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: docs, decisions, tracking
 ---
 
 # Create Decision Log

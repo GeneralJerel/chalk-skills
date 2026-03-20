@@ -1,11 +1,17 @@
 ---
 name: validate-test-coverage
 description: Validate test coverage against acceptance criteria when the user asks to check test coverage, verify tests match requirements, audit test completeness, or cross-reference user stories with test cases
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep
 argument-hint: "[feature, user story doc, or test plan to validate]"
+read-only: true
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: validation, testing, coverage
 ---
 
 # Validate Test Coverage

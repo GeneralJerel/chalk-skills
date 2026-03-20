@@ -1,11 +1,17 @@
 ---
 name: audit-performance
 description: Audit performance against Core Web Vitals and performance budgets when the user asks to check performance, audit speed, or analyze web vitals
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[page, feature, or endpoint to audit for performance]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: audit, performance, optimization
 ---
 
 # Audit Performance

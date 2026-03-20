@@ -1,11 +1,17 @@
 ---
 name: create-adr
 description: Create an Architecture Decision Record when the user asks to document a technical decision, record an architecture choice, create an ADR, or explain why a particular approach was chosen
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write, Grep
 argument-hint: "[decision title or question being decided]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: docs, architecture, decisions
 ---
 
 # Create Architecture Decision Record

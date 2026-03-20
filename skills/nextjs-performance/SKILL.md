@@ -1,11 +1,17 @@
 ---
 name: nextjs-performance
 description: Audit and optimize Next.js application performance when the user asks about Next.js performance, caching, or rendering strategies
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep
 argument-hint: "[page path, route, or performance concern]"
+read-only: true
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: nextjs, performance, optimization
 ---
 
 # Next.js Performance

@@ -1,11 +1,17 @@
 ---
 name: triage-bugs
 description: Triage and prioritize bug reports when the user asks to classify bugs, prioritize a bug backlog, triage issues, or sort bugs by severity for sprint planning
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[bug list, issue tracker query, or sprint name]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: bugs, triage, prioritization
 ---
 
 # Triage Bugs

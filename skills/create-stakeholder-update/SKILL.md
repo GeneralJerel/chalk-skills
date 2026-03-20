@@ -1,11 +1,17 @@
 ---
 name: create-stakeholder-update
 description: Create a stakeholder update when the user asks to write a status update, send a project update, prepare an executive summary, or draft a BLUF update
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[project or time period for the update]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: communication, stakeholders, reporting
 ---
 
 # Create Stakeholder Update

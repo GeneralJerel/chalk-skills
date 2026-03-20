@@ -1,0 +1,448 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════
+   THEME — CSS Custom Properties
+   Dark = Black chalkboard | Light = Cream whiteboard
+   ═══════════════════════════════════════════════════ */
+
+:root,
+body,
+body[data-theme="dark"] {
+  --board: #0d0f14;
+  --board-light: #181c24;
+  --board-dark: #080a0e;
+  --card-bg: #141820;
+  --card-border: #2a3142;
+
+  --chalk: #e8e4df;
+  --chalk-white: #f5f2ed;
+  --chalk-dim: #6b7a85;
+  --chalk-muted: #4a5568;
+
+  --border-style: dashed;
+  --border-color: #2a3142;
+  --border-color-light: #3a4556;
+
+  --text-glow: rgba(232, 228, 223, 0.3);
+  --text-glow-strong: rgba(232, 228, 223, 0.4);
+  --dust-opacity: 0.04;
+  --dust-card-opacity: 0.06;
+
+  --xp-bg: #1e293b;
+  --xp-fill: #e8e4df;
+  --xp-glow: rgba(232, 228, 223, 0.3);
+
+  --scrollbar-track: #0d0f14;
+  --scrollbar-thumb: #2a3142;
+  --scrollbar-hover: #3a4556;
+
+  --radar-grid: #2a3142;
+  --radar-area-fill: rgba(232, 228, 223, 0.06);
+  --radar-stroke: #e8e4df;
+
+  --connector-color: #3a4556;
+
+  /* Rarity card colors */
+  --card-common-border: #2a3142;
+  --card-common-hover: #3a4556;
+  --card-rare-border: #3a6a8a;
+  --card-rare-hover: #5a9ac0;
+  --card-rare-glow: rgba(90, 154, 192, 0.08);
+  --card-epic-border: #7a4a8a;
+  --card-epic-hover: #a06ab8;
+  --card-epic-glow: rgba(160, 106, 184, 0.1);
+
+  --rarity-epic-glow: #ce93d8;
+  --rarity-rare-glow: #90caf9;
+  --achievement-locked-border: #374151;
+  --achievement-locked-bg: #1a1a2e;
+}
+
+body[data-theme="light"] {
+  --board: #ffffff;
+  --board-light: #f5f5f5;
+  --board-dark: #fafafa;
+  --card-bg: #f0f0f0;
+  --card-border: #d4d4d4;
+
+  --chalk: #1a1a1a;
+  --chalk-white: #0a0a0a;
+  --chalk-dim: #6b6b6b;
+  --chalk-muted: #999999;
+
+  --border-style: solid;
+  --border-color: #d4d4d4;
+  --border-color-light: #e0e0e0;
+
+  --text-glow: none;
+  --text-glow-strong: none;
+  --dust-opacity: 0;
+  --dust-card-opacity: 0;
+
+  --xp-bg: #e0e0e0;
+  --xp-fill: #1a1a1a;
+  --xp-glow: rgba(0, 0, 0, 0.1);
+
+  --scrollbar-track: #f5f5f5;
+  --scrollbar-thumb: #cccccc;
+  --scrollbar-hover: #b0b0b0;
+
+  --radar-grid: #d4d4d4;
+  --radar-area-fill: rgba(0, 0, 0, 0.04);
+  --radar-stroke: #1a1a1a;
+
+  --connector-color: #d4d4d4;
+
+  --card-common-border: #d4d4d4;
+  --card-common-hover: #b8b8b8;
+  --card-rare-border: #7ab0d4;
+  --card-rare-hover: #5a98c0;
+  --card-rare-glow: rgba(90, 154, 192, 0.1);
+  --card-epic-border: #b88ad0;
+  --card-epic-hover: #a06ab8;
+  --card-epic-glow: rgba(160, 106, 184, 0.12);
+
+  --rarity-epic-glow: #a06ab8;
+  --rarity-rare-glow: #5a98c0;
+  --achievement-locked-border: #d4d4d4;
+  --achievement-locked-bg: #f0f0f0;
+}
+
+/* ═══════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════ */
+
+body {
+  background: var(--board);
+  color: var(--chalk);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Board texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: var(--dust-opacity);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body[data-theme="light"]::before {
+  opacity: 0.02;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Text Effects ── */
+.chalk-text {
+  text-shadow: 0 0 4px var(--text-glow), 0 0 8px rgba(232, 228, 223, 0.1);
+}
+
+.chalk-heading {
+  font-family: 'Courier New', Courier, monospace;
+  text-shadow: 0 0 6px var(--text-glow-strong), 0 0 12px var(--text-glow);
+  letter-spacing: 0.02em;
+}
+
+body[data-theme="light"] .chalk-text {
+  text-shadow: none;
+}
+
+body[data-theme="light"] .chalk-heading {
+  text-shadow: none;
+  font-weight: 700;
+}
+
+/* ── Borders ── */
+.chalk-border {
+  border: 1.5px var(--border-style) var(--border-color);
+}
+
+.chalk-border-light {
+  border: 1px var(--border-style) var(--border-color-light);
+}
+
+.chalk-line {
+  border-top: 1.5px var(--border-style) var(--border-color);
+}
+
+/* ═══════════════════════════════════════════════════
+   Card Rarity Effects
+   ═══════════════════════════════════════════════════ */
+
+.card-common {
+  border: 1.5px var(--border-style) var(--card-common-border);
+  background: var(--card-bg);
+  box-shadow: none;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.card-common:hover {
+  border-color: var(--card-common-hover);
+}
+
+.card-rare {
+  border: 1.5px var(--border-style) var(--card-rare-border);
+  background: var(--card-bg);
+  box-shadow: 0 0 8px var(--card-rare-glow);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.card-rare:hover {
+  border-color: var(--card-rare-hover);
+  box-shadow: 0 0 16px var(--card-rare-glow);
+}
+
+.card-epic {
+  border: 1.5px var(--border-style) var(--card-epic-border);
+  background: var(--card-bg);
+  box-shadow: 0 0 10px var(--card-epic-glow);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.card-epic:hover {
+  border-color: var(--card-epic-hover);
+  box-shadow: 0 0 20px var(--card-epic-glow);
+}
+
+/* ── Dust Overlay ── */
+.chalk-dust {
+  position: relative;
+  overflow: hidden;
+}
+
+.chalk-dust::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+  mix-blend-mode: overlay;
+  opacity: var(--dust-card-opacity);
+}
+
+/* ── Geometric Card Art ── */
+.card-art {
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--board);
+}
+
+.card-art svg {
+  width: 80px;
+  height: 80px;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 4px var(--text-glow));
+}
+
+/* ═══════════════════════════════════════════════════
+   XP Bar
+   ═══════════════════════════════════════════════════ */
+
+.xp-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--xp-bg);
+  overflow: hidden;
+  border: 1px var(--border-style) var(--border-color);
+}
+
+.xp-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--xp-fill);
+  box-shadow: 0 0 4px var(--xp-glow);
+}
+
+/* ═══════════════════════════════════════════════════
+   Achievement Badges
+   ═══════════════════════════════════════════════════ */
+
+.badge-locked {
+  filter: grayscale(1) opacity(0.25);
+}
+
+.badge-unlocked {
+  animation: badge-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes badge-pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════
+   Tab Navigation
+   ═══════════════════════════════════════════════════ */
+
+.tab-active {
+  color: var(--chalk);
+  text-shadow: 0 0 4px var(--text-glow);
+}
+
+.tab-inactive {
+  border-bottom: 2px solid transparent;
+  color: var(--chalk-dim);
+  transition: color 0.15s ease;
+}
+
+.tab-inactive:hover {
+  color: var(--chalk);
+}
+
+body[data-theme="light"] .tab-active {
+  text-shadow: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   Skill Tree SVG
+   ═══════════════════════════════════════════════════ */
+
+.skill-node {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.skill-node:hover {
+  transform: scale(1.1);
+}
+
+.phase-connector {
+  stroke-dasharray: 4 8;
+  opacity: 0.4;
+  stroke: var(--connector-color);
+}
+
+/* ═══════════════════════════════════════════════════
+   Scrollbar
+   ═══════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover);
+}
+
+/* ═══════════════════════════════════════════════════
+   Radar Chart
+   ═══════════════════════════════════════════════════ */
+
+.radar-axis {
+  stroke: var(--radar-grid);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.radar-grid {
+  fill: none;
+  stroke: var(--radar-grid);
+  stroke-width: 0.5;
+  stroke-dasharray: 2 4;
+}
+
+.radar-area {
+  fill: var(--radar-area-fill);
+  stroke: var(--radar-stroke);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.radar-dot {
+  fill: var(--radar-stroke);
+  filter: drop-shadow(0 0 3px var(--text-glow));
+}
+
+body[data-theme="light"] .radar-axis {
+  stroke-dasharray: none;
+}
+
+body[data-theme="light"] .radar-grid {
+  stroke-dasharray: none;
+}
+
+body[data-theme="light"] .radar-area {
+  stroke-dasharray: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   Utilities
+   ═══════════════════════════════════════════════════ */
+
+.scroll-fade {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+}
+
+.filter-active {
+  box-shadow: 0 0 0 1.5px currentColor;
+}
+
+/* ═══════════════════════════════════════════════════
+   Theme Toggle Button
+   ═══════════════════════════════════════════════════ */
+
+.theme-toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px var(--border-style) var(--border-color);
+  background: var(--board-light);
+  color: var(--chalk-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.theme-toggle:hover {
+  color: var(--chalk);
+  border-color: var(--chalk-dim);
+}
+
+/* ═══════════════════════════════════════════════════
+   Reduced Motion
+   ═══════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .card-rare,
+  .card-epic,
+  .badge-unlocked {
+    animation: none;
+  }
+  .chalk-dust::after {
+    display: none;
+  }
+}

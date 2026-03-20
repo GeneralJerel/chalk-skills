@@ -1,11 +1,17 @@
 ---
 name: create-jtbd-canvas
 description: Generate a Jobs-to-be-Done canvas mapping functional, emotional, and social jobs when the user asks to define jobs, map customer needs, or create a JTBD analysis
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[persona or problem space to analyze]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: product, jtbd, research
 ---
 
 # Create JTBD Canvas

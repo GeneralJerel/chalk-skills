@@ -1,11 +1,17 @@
 ---
 name: create-commit-message
 description: Generate a Conventional Commit message from staged git changes when the user asks to write a commit message, create a commit, or format a commit
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[optional: additional context about why this change was made]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: git, vcs, automation
 ---
 
 # Create Commit Message

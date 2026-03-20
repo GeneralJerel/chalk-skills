@@ -1,11 +1,17 @@
 ---
 name: python-testing-patterns
 description: Guide pytest patterns and testing strategies when the user asks about Python testing, fixtures, mocking, or test organization
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep
 argument-hint: "[test file, module to test, or testing concern]"
+read-only: true
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: python, testing, patterns
 ---
 
 # Python Testing Patterns

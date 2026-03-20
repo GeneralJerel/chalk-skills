@@ -1,11 +1,17 @@
 ---
 name: review-code
 description: Perform a senior-engineer code review when the user asks to review code, review a PR, review changes, or check code quality
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash
 argument-hint: "[file path, PR number, or branch name]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: review, quality, code
 ---
 
 # Review Code

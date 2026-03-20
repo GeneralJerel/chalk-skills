@@ -1,11 +1,17 @@
 ---
 name: create-prd
 description: Create a structured Product Requirements Document when the user asks to write a PRD, define requirements, or spec out a feature
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[feature or problem description]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: docs, product, planning
 ---
 
 # Create PRD

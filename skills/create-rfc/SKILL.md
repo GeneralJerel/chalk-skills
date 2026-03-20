@@ -1,11 +1,17 @@
 ---
 name: create-rfc
 description: Create a Request for Comments document when the user asks to propose a significant technical change, write an RFC, start a design review, or get cross-team input on a technical decision
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write, Grep
 argument-hint: "[proposal title or technical problem to solve]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: docs, rfc, architecture
 ---
 
 # Create RFC

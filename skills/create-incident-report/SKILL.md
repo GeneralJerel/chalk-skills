@@ -1,11 +1,17 @@
 ---
 name: create-incident-report
 description: Create an incident report when the user asks to document an outage, write an incident report, create a post-mortem, log an incident, or structure a real-time incident response
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Bash, Write
 argument-hint: "[incident description, severity, or affected system]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: incident, postmortem, ops
 ---
 
 # Create Incident Report

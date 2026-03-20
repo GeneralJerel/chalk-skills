@@ -1,11 +1,17 @@
 ---
 name: fix-findings
 description: Fix findings from the active review session — reads reviewer findings files, applies fixes by priority, and updates the resolution log. Use after pasting reviewer output into findings files.
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "2"
+metadata-version: "3"
 allowed-tools: Read, Edit, Grep, Glob, Write
 argument-hint: "[reviewer-name|all] e.g. codex, gemini, gpt4, or omit for all"
+read-only: false
+destructive: true
+idempotent: false
+open-world: false
+user-invocable: true
+tags: review, fixes, code-quality
 capabilities: review.findings.fix, review.resolution.update
 activation-intents: fix findings, address findings, resolve review findings
 activation-events: user-prompt, post-tool-use

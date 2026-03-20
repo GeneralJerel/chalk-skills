@@ -1,11 +1,17 @@
 ---
 name: create-doc
 description: Create a new doc file in .chalk/docs/ when the user asks to create, write, or add documentation
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "2"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write
 argument-hint: "[doc description]"
+read-only: false
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: docs, documentation, writing
 capabilities: docs.create, chalk.docs.create
 activation-intents: create doc, add documentation, write documentation
 activation-events: user-prompt

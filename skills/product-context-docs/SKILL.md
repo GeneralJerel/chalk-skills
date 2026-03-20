@@ -1,11 +1,17 @@
 ---
 name: product-context-docs
 description: Create and update in-repo product context documentation in /docs (product profile, features, sitemap, architecture, tech stack). Use when asked to document a product, bootstrap /docs structure, or refresh product/tech context docs for a repo.
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "2"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write, Edit
 argument-hint: "[optional: product context doc request]"
+read-only: false
+destructive: false
+idempotent: true
+open-world: false
+user-invocable: true
+tags: product, docs, context
 capabilities: product.docs.create, product.docs.update
 activation-intents: document product, bootstrap docs, refresh product context
 activation-events: user-prompt

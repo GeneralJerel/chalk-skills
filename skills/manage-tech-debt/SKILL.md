@@ -1,11 +1,17 @@
 ---
 name: manage-tech-debt
 description: Track, categorize, and prioritize technical debt when the user asks to manage tech debt, create a tech debt register, assess code quality, or plan refactoring work
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Write, Grep, Bash
 argument-hint: "[optional: specific area to assess or debt item to add]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: true
+user-invocable: true
+tags: tech-debt, maintenance, quality
 ---
 
 # Manage Tech Debt

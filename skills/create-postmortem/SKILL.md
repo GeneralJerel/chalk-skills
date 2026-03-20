@@ -1,11 +1,17 @@
 ---
 name: create-postmortem
 description: Create a blameless postmortem when the user asks to write a postmortem, document what went wrong, analyze an incident, or run a 5 Whys analysis
-owner: chalk
+author: chalk
 version: "1.0.0"
-metadata-version: "1"
+metadata-version: "3"
 allowed-tools: Read, Glob, Grep, Write
 argument-hint: "[incident description or reference to incident report]"
+read-only: false
+destructive: false
+idempotent: false
+open-world: false
+user-invocable: true
+tags: incident, postmortem, learning
 ---
 
 # Create Postmortem
