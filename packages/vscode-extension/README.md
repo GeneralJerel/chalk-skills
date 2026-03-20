@@ -1,6 +1,6 @@
 # Chalk Skills
 
-![Chalk Skills Demo](media/chalk-skills-vscode-ext.gif)
+![Chalk Skills Demo](https://raw.githubusercontent.com/GeneralJerel/chalk-skills/main/packages/vscode-extension/media/chalk-skills-vscode-ext.gif)
 
 Turn your AI agent skills into a game. Track usage, earn XP, unlock achievements, and visualize your skill library with an RPG-inspired VS Code extension.
 
