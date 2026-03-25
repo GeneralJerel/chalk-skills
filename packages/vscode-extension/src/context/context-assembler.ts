@@ -41,6 +41,18 @@ export class ContextAssembler {
     return Array.from(this.statuses.values());
   }
 
+  /** Run a single collector by ID and return its section (or null). */
+  async collectById(id: string): Promise<ContextSection | null> {
+    const collector = this.collectors.get(id);
+    if (!collector || !collector.isAvailable()) return null;
+    try {
+      const section = await collector.collect();
+      return section.isEmpty ? null : section;
+    } catch {
+      return null;
+    }
+  }
+
   /**
    * Assemble context for a specific skill.
    * If the skill declares context-needs, use those.

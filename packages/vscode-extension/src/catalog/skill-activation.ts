@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { RegistrySkillEntry } from './skill-registry';
@@ -46,7 +46,7 @@ export class SkillActivation {
   // ── State Persistence ──
 
   private loadState(): CatalogState {
-    const stored = this.context.globalState.get<CatalogState>(STATE_KEY);
+    const stored = this.context.workspaceState.get<CatalogState>(STATE_KEY);
     if (stored && stored.version === 1) return stored;
     return { ...DEFAULT_STATE };
   }
@@ -54,7 +54,7 @@ export class SkillActivation {
   private async persistState(): Promise<void> {
     this.state.enabledSkills = Array.from(this.enabledSet).sort();
     this.state.lastModified = Date.now();
-    await this.context.globalState.update(STATE_KEY, this.state);
+    await this.context.workspaceState.update(STATE_KEY, this.state);
     this._onDidChange.fire(this.state);
   }
 
@@ -139,31 +139,33 @@ export class SkillActivation {
   // ── Workspace Sync ──
 
   /**
-   * Syncs a single skill's SKILL.md symlink or marker in .chalk/skills/.
-   * When a skill is enabled, we create a symlink (or copy) from the source
-   * skills/ dir to .chalk/skills/ so the skill is discoverable. When disabled,
-   * we remove it.
+   * Syncs a single skill's enabled-state marker in `.chalk/skills/`.
+   * When a skill is enabled, we create a marker file to indicate it's active
+   * in the current workspace. When disabled, we remove the marker.
    */
   private async syncSkillToWorkspace(skillId: string, enabled: boolean): Promise<void> {
-    const targetDir = path.join(this.workspaceRoot, '.chalk', 'skills', skillId);
     const sourceDir = path.join(this.workspaceRoot, 'skills', skillId);
 
     if (enabled) {
       // Skill exists in source — ensure it's accessible in .chalk/skills/
-      if (fs.existsSync(sourceDir)) {
-        // Source skills are already discoverable by the loader via skills/ dir,
-        // so we just need to ensure .chalk/skills/ has a reference for project-level usage
-        this.ensureDir(path.join(this.workspaceRoot, '.chalk', 'skills'));
-
-        // Create a marker file that indicates this skill is enabled
-        const markerPath = path.join(this.workspaceRoot, '.chalk', 'skills', `.${skillId}.enabled`);
-        fs.writeFileSync(markerPath, JSON.stringify({ skillId, enabledAt: Date.now() }), 'utf-8');
+      try {
+        await fs.access(sourceDir);
+      } catch {
+        return; // Source skill doesn't exist
       }
+
+      await this.ensureDir(path.join(this.workspaceRoot, '.chalk', 'skills'));
+
+      // Create a marker file that indicates this skill is enabled
+      const markerPath = path.join(this.workspaceRoot, '.chalk', 'skills', `.${skillId}.enabled`);
+      await fs.writeFile(markerPath, JSON.stringify({ skillId, enabledAt: Date.now() }), 'utf-8');
     } else {
       // Remove the enabled marker
       const markerPath = path.join(this.workspaceRoot, '.chalk', 'skills', `.${skillId}.enabled`);
-      if (fs.existsSync(markerPath)) {
-        fs.unlinkSync(markerPath);
+      try {
+        await fs.unlink(markerPath);
+      } catch {
+        // Marker doesn't exist, that's fine
       }
     }
   }
@@ -171,16 +173,16 @@ export class SkillActivation {
   /** Full sync — reconcile .chalk/skills/ markers with enabled set */
   private async syncAllToWorkspace(): Promise<void> {
     const markerDir = path.join(this.workspaceRoot, '.chalk', 'skills');
-    this.ensureDir(markerDir);
+    await this.ensureDir(markerDir);
 
     // Clean up stale markers
     try {
-      const entries = fs.readdirSync(markerDir);
+      const entries = await fs.readdir(markerDir);
       for (const entry of entries) {
         if (entry.startsWith('.') && entry.endsWith('.enabled')) {
           const skillId = entry.slice(1, -'.enabled'.length);
           if (!this.enabledSet.has(skillId)) {
-            fs.unlinkSync(path.join(markerDir, entry));
+            await fs.unlink(path.join(markerDir, entry));
           }
         }
       }
@@ -191,16 +193,16 @@ export class SkillActivation {
     // Create markers for all enabled skills
     for (const skillId of this.enabledSet) {
       const markerPath = path.join(markerDir, `.${skillId}.enabled`);
-      if (!fs.existsSync(markerPath)) {
-        fs.writeFileSync(markerPath, JSON.stringify({ skillId, enabledAt: Date.now() }), 'utf-8');
+      try {
+        await fs.access(markerPath);
+      } catch {
+        await fs.writeFile(markerPath, JSON.stringify({ skillId, enabledAt: Date.now() }), 'utf-8');
       }
     }
   }
 
-  private ensureDir(dirPath: string): void {
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-    }
+  private async ensureDir(dirPath: string): Promise<void> {
+    await fs.mkdir(dirPath, { recursive: true });
   }
 
   dispose(): void {

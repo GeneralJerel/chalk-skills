@@ -1,11 +1,14 @@
-import { execSync } from 'child_process';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import { ContextCollector, ContextSection, COLLECTOR_IDS } from './collector';
 
+const execAsync = promisify(exec);
 const EXEC_TIMEOUT_MS = 3000;
 
-function run(cmd: string, cwd: string): string {
+async function run(cmd: string, cwd: string): Promise<string> {
   try {
-    return execSync(cmd, { cwd, timeout: EXEC_TIMEOUT_MS, encoding: 'utf-8' }).trim();
+    const result = await execAsync(cmd, { cwd, timeout: EXEC_TIMEOUT_MS });
+    return result.stdout.trim();
   } catch {
     return '';
   }
@@ -18,18 +21,33 @@ export class GitCollector implements ContextCollector {
   constructor(private workspaceRoot: string) {}
 
   isAvailable(): boolean {
-    return run('git rev-parse --is-inside-work-tree', this.workspaceRoot) === 'true';
+    // Use a synchronous check — isAvailable is called during registration
+    try {
+      const { execSync } = require('child_process');
+      return execSync('git rev-parse --is-inside-work-tree', {
+        cwd: this.workspaceRoot,
+        timeout: EXEC_TIMEOUT_MS,
+        encoding: 'utf-8',
+      }).trim() === 'true';
+    } catch {
+      return false;
+    }
   }
 
   async collect(): Promise<ContextSection> {
     const cwd = this.workspaceRoot;
     const now = Date.now();
 
-    const branch = run('git branch --show-current', cwd) || 'detached HEAD';
-    const status = run('git status --porcelain', cwd);
-    const logLines = run('git log --oneline -10 --no-decorate', cwd);
-    const diffStat = run('git diff --stat HEAD~5..HEAD 2>/dev/null', cwd);
-    const aheadBehind = run('git rev-list --left-right --count HEAD...@{upstream} 2>/dev/null', cwd);
+    const [branch, status, logLines, diffStat, aheadBehind, prInfo] = await Promise.all([
+      run('git branch --show-current', cwd),
+      run('git status --porcelain', cwd),
+      run('git log --oneline -10 --no-decorate', cwd),
+      run('git diff --stat HEAD~5..HEAD 2>/dev/null', cwd),
+      run('git rev-list --left-right --count HEAD...@{upstream} 2>/dev/null', cwd),
+      run('gh pr view --json title,url,state,number --jq \'\"PR #\" + (.number|tostring) + \": \" + .title + \" (\" + .state + \")\"\'', cwd),
+    ]);
+
+    const currentBranch = branch || 'detached HEAD';
 
     // Parse uncommitted changes
     const statusLines = status ? status.split('\n').filter(Boolean) : [];
@@ -47,12 +65,9 @@ export class GitCollector implements ContextCollector {
       if (parts.length > 0) trackingInfo = ` (${parts.join(', ')})`;
     }
 
-    // Try to get active PR info (non-blocking)
-    const prInfo = run('gh pr view --json title,url,state,number --jq \'\"PR #\" + (.number|tostring) + \": \" + .title + \" (\" + .state + \")\"\'', cwd);
-
     // Build content
     const contentParts: string[] = [];
-    contentParts.push(`Branch: ${branch}${trackingInfo}`);
+    contentParts.push(`Branch: ${currentBranch}${trackingInfo}`);
 
     if (statusLines.length > 0) {
       contentParts.push(`Uncommitted: ${statusLines.length} files (${modified} modified, ${added} added, ${deleted} deleted)`);

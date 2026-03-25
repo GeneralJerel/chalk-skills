@@ -102,25 +102,32 @@ export class ContextManager implements vscode.Disposable {
 
   private async writeEnvBridge(skill: ChalkSkill): Promise<void> {
     try {
-      // Collect key env vars for preamble-based skills
-      const { execSync } = await import('child_process');
+      const { exec } = await import('child_process');
+      const { promisify } = await import('util');
+      const execAsync = promisify(exec);
+
       let branch = 'unknown';
       try {
-        branch = execSync('git branch --show-current', {
+        const result = await execAsync('git branch --show-current', {
           cwd: this.workspaceRoot,
           timeout: 2000,
-          encoding: 'utf-8',
-        }).trim();
+        });
+        branch = result.stdout.trim();
       } catch {
         // Not a git repo
       }
 
-      const diagnosticCount = this.countDiagnostics();
+      // Reuse DiagnosticsCollector to count errors/warnings (DRY)
+      const diagnosticsResult = await this.assembler.collectById('diagnostics');
+      const errorMatch = diagnosticsResult?.content.match(/Errors \((\d+)\)/);
+      const warnMatch = diagnosticsResult?.content.match(/Warnings \((\d+)\)/);
+      const errors = errorMatch ? errorMatch[1] : '0';
+      const warnings = warnMatch ? warnMatch[1] : '0';
 
       await this.writer.writeEnvBridge({
         CONTEXT_BRANCH: branch,
-        CONTEXT_ERRORS: String(diagnosticCount.errors),
-        CONTEXT_WARNINGS: String(diagnosticCount.warnings),
+        CONTEXT_ERRORS: errors,
+        CONTEXT_WARNINGS: warnings,
         CONTEXT_SKILL: skill.id,
         CONTEXT_PHASE: skill.phase,
         CONTEXT_FILE: `.chalk/context/${skill.id}.md`,
@@ -130,25 +137,9 @@ export class ContextManager implements vscode.Disposable {
     }
   }
 
-  private countDiagnostics(): { errors: number; warnings: number } {
-    const allDiagnostics = vscode.languages.getDiagnostics();
-    let errors = 0;
-    let warnings = 0;
-
-    for (const [uri, diagnostics] of allDiagnostics) {
-      if (!uri.fsPath.startsWith(this.workspaceRoot)) continue;
-      for (const diag of diagnostics) {
-        if (diag.severity === vscode.DiagnosticSeverity.Error) errors++;
-        else if (diag.severity === vscode.DiagnosticSeverity.Warning) warnings++;
-      }
-    }
-
-    return { errors, warnings };
-  }
-
-  private ensureGitignore(): void {
+  private async ensureGitignore(): Promise<void> {
     if (this.gitignoreSetup) return;
-    this.writer.ensureGitignore();
+    await this.writer.ensureGitignore();
     this.gitignoreSetup = true;
   }
 

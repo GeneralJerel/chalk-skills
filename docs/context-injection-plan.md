@@ -59,7 +59,7 @@ Some frameworks solve this by embedding bash preambles in each skill — collect
 │  │              │───▶│   Assembler  │───▶│   Writer     │ │
 │  │  git, tests, │    │              │    │              │ │
 │  │  lint, files  │    │  Filters by  │    │  Writes to   │ │
-│  │              │    │  skill needs  │    │  .chalk/ctx/ │ │
+│  │              │    │  skill needs  │    │.chalk/context/│ │
 │  └──────────────┘    └──────────────┘    └──────────────┘ │
 │         ▲                                       │         │
 │         │                                       ▼         │

@@ -15,9 +15,8 @@ function parseCommaSeparated(value: string | undefined): string[] {
 
 /** Parse a frontmatter field that can be a YAML array or comma-separated string */
 function parseListField(value: unknown): string[] {
-  if (!value) return [];
-  if (Array.isArray(value)) return value.map(String).filter(Boolean);
   if (typeof value === 'string') return parseCommaSeparated(value);
+  if (Array.isArray(value)) return value.map(String).filter(Boolean);
   return [];
 }
 

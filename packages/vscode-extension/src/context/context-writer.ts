@@ -1,4 +1,5 @@
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
+import * as fsSync from 'fs';
 import * as path from 'path';
 
 const CONTEXT_DIR_NAME = '.chalk/context';
@@ -12,23 +13,23 @@ export class ContextWriter {
 
   /** Write skill-specific context file. Returns the file path. */
   async writeForSkill(skillId: string, markdown: string): Promise<string> {
-    this.ensureDir();
+    await this.ensureDir();
     const filePath = path.join(this.contextDir, `${skillId}.md`);
-    fs.writeFileSync(filePath, markdown, 'utf-8');
+    await fs.writeFile(filePath, markdown, 'utf-8');
     return filePath;
   }
 
   /** Write generic workspace context. Returns the file path. */
   async writeWorkspace(markdown: string): Promise<string> {
-    this.ensureDir();
+    await this.ensureDir();
     const filePath = path.join(this.contextDir, 'workspace.md');
-    fs.writeFileSync(filePath, markdown, 'utf-8');
+    await fs.writeFile(filePath, markdown, 'utf-8');
     return filePath;
   }
 
   /** Write env-var bridge file for preamble-based skills. */
   async writeEnvBridge(vars: Record<string, string>): Promise<string> {
-    this.ensureDir();
+    await this.ensureDir();
     const lines = [
       '# Auto-generated workspace context — source this in your preamble',
       `# Generated: ${new Date().toISOString()}`,
@@ -41,33 +42,33 @@ export class ContextWriter {
     }
     lines.push('');
     const filePath = path.join(this.contextDir, 'env.sh');
-    fs.writeFileSync(filePath, lines.join('\n'), 'utf-8');
+    await fs.writeFile(filePath, lines.join('\n'), 'utf-8');
     return filePath;
   }
 
   /** Ensure .chalk/context/ is in .gitignore */
-  ensureGitignore(): void {
+  async ensureGitignore(): Promise<void> {
     const gitignorePath = path.join(this.workspaceRoot, '.gitignore');
     const entry = '.chalk/context/';
 
     try {
-      if (fs.existsSync(gitignorePath)) {
-        const content = fs.readFileSync(gitignorePath, 'utf-8');
+      try {
+        const content = await fs.readFile(gitignorePath, 'utf-8');
         if (content.includes(entry)) return; // Already present
 
         // Append
         const separator = content.endsWith('\n') ? '' : '\n';
-        fs.appendFileSync(gitignorePath, `${separator}\n# Auto-generated workspace context (Chalk)\n${entry}\n`);
-      } else {
-        // Create new .gitignore
-        fs.writeFileSync(gitignorePath, `# Auto-generated workspace context (Chalk)\n${entry}\n`);
+        await fs.appendFile(gitignorePath, `${separator}\n# Auto-generated workspace context (Chalk)\n${entry}\n`);
+      } catch {
+        // File doesn't exist — create new .gitignore
+        await fs.writeFile(gitignorePath, `# Auto-generated workspace context (Chalk)\n${entry}\n`);
       }
     } catch {
       // Non-fatal — user can add manually
     }
   }
 
-  private ensureDir(): void {
-    fs.mkdirSync(this.contextDir, { recursive: true });
+  private async ensureDir(): Promise<void> {
+    await fs.mkdir(this.contextDir, { recursive: true });
   }
 }
