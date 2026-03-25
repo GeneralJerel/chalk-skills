@@ -2,7 +2,7 @@
 name: review-changes
 description: End-to-end review pipeline — creates a handoff, generates a review (self-review or paste-ready for another provider), then offers to fix findings. Use when you want to review your changes before pushing.
 author: chalk
-version: "1.0.0"
+version: "1.1.0"
 metadata-version: "3"
 allowed-tools: Bash, Read, Edit, Grep, Glob, Write
 argument-hint: "[optional session name or issue reference]"
@@ -17,11 +17,34 @@ activation-intents: review my changes, run review pipeline, self review changes
 activation-events: user-prompt, session-start
 activation-artifacts: .chalk/reviews/**, **/*
 risk-level: high
+context-needs:
+  - git-status
+  - diagnostics
+  - test-results
+  - recent-activity
+benefits-from:
+  - create-plan
+  - create-prd
 ---
 
 # Review Changes
 
 Orchestrate the full review pipeline: handoff → review → fix. This skill chains three phases with user checkpoints between each.
+
+## Phase 0: Read Workspace Context
+
+Before starting the review, check for workspace context assembled by the Chalk extension:
+
+1. Read `.chalk/context/review-changes.md` if it exists. This contains:
+   - Current git state (branch, uncommitted changes, recent commits)
+   - Active diagnostics (lint/type errors already flagged by the IDE)
+   - Latest test results (pass/fail counts, failing test names)
+   - Recently edited files (what the developer has been working on)
+2. If the context file doesn't exist, proceed without it — the skill works standalone.
+3. Use context to prioritize review focus:
+   - If there are existing diagnostics errors, address those first
+   - If tests are failing, flag test-related changes as high priority
+   - If recently edited files don't match the diff, note potential forgotten files
 
 ## Phase 1: Create Handoff
 

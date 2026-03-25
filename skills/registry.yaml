@@ -1,0 +1,456 @@
+# Chalk Skill Registry
+# This file indexes all available skills for the catalog UI.
+# Skills are grouped into bundles for quick onboarding.
+
+version: "1.0.0"
+
+# ── Role Bundles ──
+# Curated presets for quick start. Users can customize after selecting a bundle.
+
+bundles:
+  starter:
+    label: "Starter"
+    description: "Essential skills every developer needs. Start here."
+    icon: "rocket"
+    skills:
+      - commit
+      - create-plan
+      - create-doc
+      - create-pr
+      - review-changes
+      - create-pr-description
+      - work-issue
+
+  frontend-dev:
+    label: "Frontend Developer"
+    description: "React, Next.js, accessibility, and performance."
+    icon: "layout"
+    includes: starter
+    skills:
+      - audit-accessibility
+      - audit-performance
+      - react-component-patterns
+      - react-hook-patterns
+      - react-performance-audit
+      - nextjs-app-router-patterns
+      - nextjs-api-patterns
+      - nextjs-performance
+      - create-test-plan
+      - review-code
+      - debug-systematic
+
+  mobile-dev:
+    label: "Mobile Developer"
+    description: "Flutter patterns, platform-adaptive UI, and state management."
+    icon: "smartphone"
+    includes: starter
+    skills:
+      - flutter-widget-patterns
+      - flutter-state-management
+      - flutter-platform-patterns
+      - create-test-plan
+      - review-code
+      - debug-systematic
+      - audit-performance
+
+  backend-dev:
+    label: "Backend Developer"
+    description: "APIs, data models, Python/FastAPI patterns, and security."
+    icon: "server"
+    includes: starter
+    skills:
+      - create-api-design
+      - create-data-model
+      - fastapi-endpoint-patterns
+      - python-clean-architecture
+      - python-testing-patterns
+      - audit-api-consistency
+      - audit-security
+      - create-test-plan
+      - review-code
+      - debug-systematic
+      - create-runbook
+
+  tech-lead:
+    label: "Tech Lead"
+    description: "Architecture, RFCs, estimation, reviews, and operational readiness."
+    icon: "git-branch"
+    includes: starter
+    skills:
+      - create-adr
+      - create-rfc
+      - create-estimation
+      - create-roadmap
+      - create-release-checklist
+      - create-release-notes
+      - create-rollback-plan
+      - create-runbook
+      - create-postmortem
+      - create-incident-report
+      - create-retro
+      - audit-security
+      - create-threat-model
+      - review-code
+      - review-changes
+      - manage-tech-debt
+      - analyze-dependencies
+      - project-standards
+      - create-onboarding-guide
+      - debug-systematic
+
+  product-manager:
+    label: "Product Manager"
+    description: "PRDs, roadmaps, user research, metrics, and stakeholder comms."
+    icon: "target"
+    skills:
+      - create-prd
+      - review-prd
+      - create-roadmap
+      - create-plan
+      - create-user-stories
+      - create-jtbd-canvas
+      - create-ost
+      - create-shape-up-pitch
+      - create-experiment-design
+      - create-metrics-framework
+      - create-gtm-brief
+      - create-stakeholder-update
+      - create-interview-guide
+      - create-doc
+      - analyze-competitors
+      - analyze-metrics
+      - synthesize-feedback
+      - synthesize-research
+      - score-backlog
+
+  full-stack:
+    label: "Full Stack"
+    description: "Everything. All 80 skills."
+    icon: "layers"
+    all: true
+
+# ── Skill Catalog ──
+# Indexed metadata for every skill. Phase is auto-classified by the extension
+# but listed here for the catalog UI to render without parsing every SKILL.md.
+
+skills:
+  analyze-competitors:
+    description: "Build a competitive positioning matrix and strategy canvas"
+    phase: design
+    tags: [product, strategy, analysis]
+  analyze-dependencies:
+    description: "Audit project dependencies for risk and vulnerabilities"
+    phase: engineering
+    tags: [security, dependencies, audit]
+  analyze-metrics:
+    description: "Analyze product metrics and identify trends"
+    phase: design
+    tags: [product, metrics, analytics]
+  audit-accessibility:
+    description: "Audit for WCAG 2.1 AA compliance using POUR principles"
+    phase: development
+    tags: [a11y, wcag, accessibility]
+  audit-api-consistency:
+    description: "Audit API endpoints for consistency and quality"
+    phase: engineering
+    tags: [api, consistency, audit]
+  audit-performance:
+    description: "Audit against Core Web Vitals and performance budgets"
+    phase: development
+    tags: [performance, web-vitals, audit]
+  audit-security:
+    description: "Perform security audit — OWASP, secrets, vulnerabilities"
+    phase: engineering
+    tags: [security, owasp, audit]
+  capture-pr-visuals:
+    description: "Auto-capture screenshots and GIFs for PR documentation"
+    phase: launch
+    tags: [pr, screenshots, documentation]
+  chalk-skill-creator:
+    description: "Create new Chalk-managed skills with proper metadata"
+    phase: foundation
+    tags: [meta, skill-authoring]
+  commit:
+    description: "Stage and commit changes using conventional commits"
+    phase: development
+    tags: [git, commit, workflow]
+  create-adr:
+    description: "Create an Architecture Decision Record"
+    phase: architecture
+    tags: [adr, architecture, decisions]
+  create-api-design:
+    description: "Design REST or GraphQL API from feature specs"
+    phase: architecture
+    tags: [api, design, rest, graphql]
+  create-bug-report:
+    description: "Create a structured bug report with reproduction steps"
+    phase: engineering
+    tags: [bugs, issues, reporting]
+  create-commit-message:
+    description: "Generate Conventional Commit message from staged changes"
+    phase: development
+    tags: [git, commit, conventional]
+  create-data-model:
+    description: "Design data model — schemas, entities, ERDs"
+    phase: architecture
+    tags: [database, schema, data-model]
+  create-decision-log:
+    description: "Record a product or engineering decision with context"
+    phase: foundation
+    tags: [decisions, documentation]
+  create-doc:
+    description: "Create a new doc in .chalk/docs/"
+    phase: foundation
+    tags: [docs, documentation]
+  create-estimation:
+    description: "Create a three-point estimation for features"
+    phase: design
+    tags: [estimation, planning, scoping]
+  create-experiment-design:
+    description: "Design a rigorous A/B test or experiment"
+    phase: design
+    tags: [ab-test, experiment, hypothesis]
+  create-feature-flag-plan:
+    description: "Plan progressive delivery with feature flags"
+    phase: launch
+    tags: [feature-flags, rollout, deployment]
+  create-github-issue:
+    description: "Create a GitHub issue with structured labels and body"
+    phase: development
+    tags: [github, issues]
+  create-gtm-brief:
+    description: "Create a go-to-market brief with positioning and launch plan"
+    phase: launch
+    tags: [gtm, launch, marketing]
+  create-handoff:
+    description: "Generate handoff doc summarizing changes and review focus areas"
+    phase: launch
+    tags: [handoff, review, documentation]
+  create-incident-report:
+    description: "Document an outage or incident with timeline and impact"
+    phase: engineering
+    tags: [incident, outage, reporting]
+  create-interview-guide:
+    description: "Generate Mom Test interview guide for user research"
+    phase: design
+    tags: [research, interviews, user-research]
+  create-jtbd-canvas:
+    description: "Map functional, emotional, and social jobs-to-be-done"
+    phase: design
+    tags: [jtbd, product, research]
+  create-metrics-framework:
+    description: "Define North Star, input metrics, and guardrails"
+    phase: design
+    tags: [metrics, kpi, measurement]
+  create-onboarding-guide:
+    description: "Create a developer onboarding and setup guide"
+    phase: foundation
+    tags: [onboarding, documentation, setup]
+  create-ost:
+    description: "Generate an Opportunity Solution Tree"
+    phase: design
+    tags: [ost, discovery, opportunities]
+  create-plan:
+    description: "Create a .plan.md file with structured todos"
+    phase: foundation
+    tags: [planning, plan, workflow]
+  create-postmortem:
+    description: "Create a blameless postmortem with 5 Whys analysis"
+    phase: engineering
+    tags: [postmortem, incident, retrospective]
+  create-pr:
+    description: "Create a GitHub pull request with structured body"
+    phase: launch
+    tags: [github, pr, pull-request]
+  create-pr-description:
+    description: "Generate structured PR description from staged changes"
+    phase: launch
+    tags: [pr, description, documentation]
+  create-prd:
+    description: "Create a Product Requirements Document"
+    phase: design
+    tags: [prd, requirements, product]
+  create-release-checklist:
+    description: "Generate comprehensive release checklist"
+    phase: launch
+    tags: [release, checklist, deployment]
+  create-release-notes:
+    description: "Generate user-facing release notes and changelog"
+    phase: launch
+    tags: [release, changelog, documentation]
+  create-retro:
+    description: "Create a sprint or project retrospective"
+    phase: engineering
+    tags: [retro, retrospective, team]
+  create-review:
+    description: "Bootstrap local AI review pipeline with paste-ready prompts"
+    phase: engineering
+    tags: [review, code-quality, pipeline]
+  create-rfc:
+    description: "Create a Request for Comments for technical decisions"
+    phase: architecture
+    tags: [rfc, design-review, proposal]
+  create-roadmap:
+    description: "Create a Now/Next/Later outcome-oriented roadmap"
+    phase: design
+    tags: [roadmap, planning, product]
+  create-rollback-plan:
+    description: "Create deployment rollback plan and revert strategy"
+    phase: launch
+    tags: [rollback, deployment, safety]
+  create-runbook:
+    description: "Create an operational runbook for procedures"
+    phase: engineering
+    tags: [runbook, ops, documentation]
+  create-shape-up-pitch:
+    description: "Write a Shape Up pitch with appetite and solution sketch"
+    phase: design
+    tags: [shape-up, pitch, proposal]
+  create-stakeholder-update:
+    description: "Create a BLUF status update for stakeholders"
+    phase: design
+    tags: [stakeholder, update, communication]
+  create-test-plan:
+    description: "Create test plan with cases and QA strategy"
+    phase: engineering
+    tags: [testing, qa, test-plan]
+  create-threat-model:
+    description: "STRIDE threat modeling for systems and components"
+    phase: architecture
+    tags: [security, stride, threat-model]
+  create-user-stories:
+    description: "Generate user stories with BDD acceptance criteria"
+    phase: design
+    tags: [user-stories, bdd, requirements]
+  debug-systematic:
+    description: "Four-phase systematic debugging workflow"
+    phase: development
+    tags: [debugging, troubleshooting, root-cause]
+  fastapi-endpoint-patterns:
+    description: "FastAPI design patterns — Pydantic, DI, async, errors"
+    phase: reference
+    tags: [python, fastapi, patterns]
+  fix-findings:
+    description: "Fix findings from the active review session"
+    phase: development
+    tags: [review, fix, code-quality]
+  fix-review:
+    description: "Fetch PR review comments and apply fixes locally"
+    phase: development
+    tags: [pr, review, fix]
+  flutter-platform-patterns:
+    description: "Platform-adaptive UI and native integration patterns"
+    phase: reference
+    tags: [flutter, mobile, platform]
+  flutter-state-management:
+    description: "Flutter state management — setState, Provider, Riverpod, BLoC"
+    phase: reference
+    tags: [flutter, state, patterns]
+  flutter-widget-patterns:
+    description: "Flutter widget composition — Stateless, Stateful, keys, builders"
+    phase: reference
+    tags: [flutter, widgets, patterns]
+  manage-tech-debt:
+    description: "Track, categorize, and prioritize technical debt"
+    phase: engineering
+    tags: [tech-debt, refactoring, quality]
+  nextjs-api-patterns:
+    description: "Next.js Route Handlers and Server Actions patterns"
+    phase: reference
+    tags: [nextjs, api, patterns]
+  nextjs-app-router-patterns:
+    description: "Next.js App Router — server/client components, caching, streaming"
+    phase: reference
+    tags: [nextjs, react, patterns]
+  nextjs-performance:
+    description: "Audit and optimize Next.js application performance"
+    phase: development
+    tags: [nextjs, performance, optimization]
+  product-context-docs:
+    description: "Create and update in-repo product context documentation"
+    phase: foundation
+    tags: [docs, product, context]
+  project-skill-creator:
+    description: "Create project-managed skills in .chalk/skills"
+    phase: foundation
+    tags: [meta, skill-authoring, project]
+  project-standards:
+    description: "Infer and maintain organizational coding standards"
+    phase: foundation
+    tags: [standards, conventions, team]
+  python-clean-architecture:
+    description: "Clean architecture for Python — services, repos, DI, errors"
+    phase: reference
+    tags: [python, architecture, patterns]
+  python-testing-patterns:
+    description: "pytest patterns — fixtures, mocking, organization"
+    phase: reference
+    tags: [python, testing, pytest]
+  react-component-patterns:
+    description: "React + TypeScript component design patterns"
+    phase: reference
+    tags: [react, typescript, patterns]
+  react-hook-patterns:
+    description: "Custom React hook best practices and composition"
+    phase: reference
+    tags: [react, hooks, patterns]
+  react-performance-audit:
+    description: "Audit React component rendering performance"
+    phase: development
+    tags: [react, performance, rendering]
+  review-changes:
+    description: "End-to-end review pipeline — handoff, review, fix"
+    phase: engineering
+    tags: [review, pipeline, code-quality]
+  review-code:
+    description: "Senior-engineer code review for PRs and changes"
+    phase: engineering
+    tags: [review, code-quality, pr]
+  review-prd:
+    description: "Review PRD for completeness and anti-patterns"
+    phase: design
+    tags: [prd, review, product]
+  score-backlog:
+    description: "Score and rank backlog items using RICE, ICE, or custom weights"
+    phase: design
+    tags: [backlog, prioritization, scoring]
+  setup-chalk:
+    description: "Initialize .chalk folder — analyze repo architecture and identity"
+    phase: foundation
+    tags: [setup, initialization, chalk]
+  setup-docs:
+    description: "Populate .chalk/docs with real project content from codebase"
+    phase: foundation
+    tags: [setup, docs, initialization]
+  synthesize-feedback:
+    description: "Synthesize customer feedback into thematic clusters"
+    phase: design
+    tags: [feedback, voc, research]
+  synthesize-research:
+    description: "Synthesize interview notes into themed research findings"
+    phase: design
+    tags: [research, synthesis, qualitative]
+  triage-bugs:
+    description: "Triage and prioritize bug reports by severity"
+    phase: engineering
+    tags: [bugs, triage, prioritization]
+  update-doc:
+    description: "Update an existing doc in .chalk/docs/"
+    phase: foundation
+    tags: [docs, documentation, update]
+  validate-chalk:
+    description: "Validate chalk.json schema and docs completeness"
+    phase: foundation
+    tags: [validation, chalk, health-check]
+  validate-skill-coverage:
+    description: "Audit which lifecycle phases have skill gaps"
+    phase: foundation
+    tags: [meta, coverage, audit]
+  validate-test-coverage:
+    description: "Validate test coverage against acceptance criteria"
+    phase: engineering
+    tags: [testing, coverage, validation]
+  work-issue:
+    description: "Pick up a GitHub issue — fetch, branch, and set up context"
+    phase: development
+    tags: [github, issues, workflow]

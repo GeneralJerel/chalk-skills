@@ -57,6 +57,9 @@ export interface ChalkSkill {
   phase: Phase;
   filePath: string;
   bodyMarkdown: string;
+  // Context injection fields
+  contextNeeds: string[];             // Which context signals this skill wants
+  benefitsFrom: string[];             // Which upstream skills enrich this one
 }
 
 // ── Phase Metadata ──
@@ -175,7 +178,12 @@ export type ExtensionMessage =
   | { type: 'achievement:unlocked'; payload: { id: string; name: string; icon: string; xpReward: number } }
   | { type: 'level:up'; payload: { oldLevel: number; newLevel: number; title: string } }
   | { type: 'autorecord:triggered'; payload: { skillId: string; trigger: 'file-read' | 'artifact-change' } }
-  | { type: 'navigate:tab'; payload: { tab: string; skillId?: string } };
+  | { type: 'navigate:tab'; payload: { tab: string; skillId?: string } }
+  | { type: 'context:loaded'; payload: { skillId: string; markdown: string; collectors: import('./context/collectors/collector').CollectorStatus[] } }
+  | { type: 'catalog:loaded'; payload: import('./catalog/skill-registry').RegistryManifest }
+  | { type: 'catalog:state'; payload: import('./catalog/skill-activation').CatalogState }
+  | { type: 'catalog:skillToggled'; payload: { skillId: string; enabled: boolean } }
+  | { type: 'catalog:bundleApplied'; payload: { bundleId: string; skillIds: string[] } };
 
 export type WebviewMessage =
   | { type: 'request:skills' }
@@ -185,4 +193,11 @@ export type WebviewMessage =
   | { type: 'open:skillFile'; payload: { filePath: string } }
   | { type: 'override:phase'; payload: { skillId: string; phase: Phase } }
   | { type: 'theme:changed'; payload: { theme: 'dark' | 'light' } }
-  | { type: 'create:skill' };
+  | { type: 'create:skill' }
+  | { type: 'context:request'; payload: { skillId: string } }
+  | { type: 'catalog:request' }
+  | { type: 'catalog:requestState' }
+  | { type: 'catalog:toggleSkill'; payload: { skillId: string } }
+  | { type: 'catalog:applyBundle'; payload: { bundleId: string } }
+  | { type: 'catalog:enableMany'; payload: { skillIds: string[] } }
+  | { type: 'catalog:clearAll' };

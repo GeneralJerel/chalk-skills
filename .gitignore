@@ -2,3 +2,6 @@ node_modules/
 dist/
 *.vsix
 .DS_Store
+
+# Auto-generated workspace context (Chalk)
+.chalk/context/

@@ -8,12 +8,18 @@ import { AutoRecorder } from './auto-recorder';
 import { autoClassifySkills, loadPhaseOverrides, savePhaseOverride } from './auto-indexer';
 import { getTfidfClassifier } from './tfidf-classifier';
 import { initScaffold, createSkill } from './init-scaffold';
+import { ContextManager } from './context/context-manager';
+import { SkillRegistry, findRegistryPath } from './catalog/skill-registry';
+import { SkillActivation } from './catalog/skill-activation';
 
 let skills: ChalkSkill[] = [];
 let progressionState: ProgressionState;
 let treeProvider: SkillTreeProvider;
 let currentPanel: vscode.WebviewPanel | undefined;
 let autoRecorder: AutoRecorder;
+let contextManager: ContextManager | undefined;
+let skillRegistry: SkillRegistry | undefined;
+let skillActivation: SkillActivation | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
   progressionState = loadProgressionState(context);
@@ -22,6 +28,32 @@ export function activate(context: vscode.ExtensionContext) {
   // Register tree view
   vscode.window.registerTreeDataProvider('chalkSkillTree', treeProvider);
 
+  // Initialize context manager and catalog
+  const root = getWorkspaceRoot();
+  if (root) {
+    contextManager = new ContextManager(root);
+    context.subscriptions.push(contextManager);
+    contextManager.startBackgroundRefresh();
+
+    // Load skill registry (catalog)
+    const registryPath = findRegistryPath(root);
+    if (registryPath) {
+      try {
+        skillRegistry = SkillRegistry.fromFile(registryPath);
+      } catch {
+        // Registry load is best-effort
+      }
+    }
+
+    // Initialize skill activation (selection state)
+    skillActivation = new SkillActivation(context, root);
+    skillActivation.onDidChange(() => {
+      if (currentPanel && skillActivation) {
+        postToWebview({ type: 'catalog:state', payload: skillActivation.getState() });
+      }
+    });
+  }
+
   // Initialize auto-recorder
   autoRecorder = new AutoRecorder({
     onSkillUsed: (skillId, trigger) => {
@@ -29,6 +61,24 @@ export function activate(context: vscode.ExtensionContext) {
         if (currentPanel) {
           postToWebview({ type: 'autorecord:triggered', payload: { skillId, trigger } });
         }
+      });
+    },
+    onContextNeeded: (skill) => {
+      if (!contextManager) return;
+      contextManager.assembleAndWrite(skill).then(({ result }) => {
+        vscode.window.setStatusBarMessage(`Context assembled for ${skill.name}`, 3000);
+        if (currentPanel) {
+          postToWebview({
+            type: 'context:loaded',
+            payload: {
+              skillId: skill.id,
+              markdown: result.markdown,
+              collectors: result.collectorStatuses,
+            },
+          });
+        }
+      }).catch(() => {
+        // Context assembly is best-effort — don't block skill usage
       });
     },
   });
@@ -59,6 +109,7 @@ export function activate(context: vscode.ExtensionContext) {
         `Auto-indexed ${skills.filter(s => s.phase !== 'uncategorized').length} / ${skills.length} skills`,
       );
     }),
+    vscode.commands.registerCommand('chalkSkills.openCatalog', () => openWebview(context, 'catalog')),
   );
 
   // File watcher for SKILL.md changes
@@ -230,6 +281,74 @@ function openWebview(context: vscode.ExtensionContext, tab: string, skillId?: st
           break;
         case 'create:skill':
           vscode.commands.executeCommand('chalkSkills.createSkill');
+          break;
+        case 'context:request': {
+          const targetSkill = skills.find(s => s.id === message.payload.skillId);
+          if (targetSkill && contextManager) {
+            contextManager.assembleAndWrite(targetSkill).then(({ result }) => {
+              postToWebview({
+                type: 'context:loaded',
+                payload: {
+                  skillId: targetSkill.id,
+                  markdown: result.markdown,
+                  collectors: result.collectorStatuses,
+                },
+              });
+            });
+          }
+          break;
+        }
+        case 'catalog:request':
+          if (skillRegistry) {
+            postToWebview({
+              type: 'catalog:loaded',
+              payload: {
+                version: '1.0.0',
+                bundles: skillRegistry.getAllBundles(),
+                skills: skillRegistry.getAllSkills(),
+              },
+            });
+          }
+          if (skillActivation) {
+            postToWebview({ type: 'catalog:state', payload: skillActivation.getState() });
+          }
+          break;
+        case 'catalog:requestState':
+          if (skillActivation) {
+            postToWebview({ type: 'catalog:state', payload: skillActivation.getState() });
+          }
+          break;
+        case 'catalog:toggleSkill':
+          if (skillActivation) {
+            const nowEnabled = await skillActivation.toggleSkill(message.payload.skillId);
+            postToWebview({
+              type: 'catalog:skillToggled',
+              payload: { skillId: message.payload.skillId, enabled: nowEnabled },
+            });
+          }
+          break;
+        case 'catalog:applyBundle': {
+          if (skillActivation && skillRegistry) {
+            const bundle = skillRegistry.getBundle(message.payload.bundleId);
+            if (bundle) {
+              await skillActivation.applyBundle(bundle.id, bundle.skillIds);
+              postToWebview({
+                type: 'catalog:bundleApplied',
+                payload: { bundleId: bundle.id, skillIds: bundle.skillIds },
+              });
+            }
+          }
+          break;
+        }
+        case 'catalog:enableMany':
+          if (skillActivation) {
+            await skillActivation.enableMany(message.payload.skillIds);
+          }
+          break;
+        case 'catalog:clearAll':
+          if (skillActivation) {
+            await skillActivation.clearAll();
+          }
           break;
       }
     },
