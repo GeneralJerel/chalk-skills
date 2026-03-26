@@ -85,6 +85,10 @@
         "title": "Chalk Skills: Auto-Index Skills"
       },
       {
+        "command": "chalkSkills.openCatalog",
+        "title": "Chalk Skills: Open Skill Catalog"
+      },
+      {
         "command": "chalkSkills.init",
         "title": "Chalk Skills: Init — Scaffold Sample Skills"
       },
@@ -105,6 +109,35 @@
           "type": "number",
           "default": 60,
           "description": "Minimum seconds between auto-recordings of the same skill"
+        },
+        "chalkSkills.context.mode": {
+          "type": "string",
+          "default": "on-demand",
+          "enum": [
+            "on-demand",
+            "background",
+            "off"
+          ],
+          "enumDescriptions": [
+            "Assemble context when a skill is activated",
+            "Continuously refresh context in the background",
+            "Disable context injection"
+          ],
+          "description": "When to assemble workspace context for skills"
+        },
+        "chalkSkills.context.backgroundIntervalSeconds": {
+          "type": "number",
+          "default": 120,
+          "minimum": 30,
+          "maximum": 600,
+          "description": "How often to refresh background context (in seconds)"
+        },
+        "chalkSkills.context.maxLines": {
+          "type": "number",
+          "default": 500,
+          "minimum": 100,
+          "maximum": 2000,
+          "description": "Maximum lines in the generated context document"
         },
         "chalkSkills.animations.level": {
           "type": "string",

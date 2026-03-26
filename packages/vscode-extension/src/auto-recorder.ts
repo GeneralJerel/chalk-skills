@@ -4,12 +4,14 @@ import { ChalkSkill } from './types';
 
 export interface AutoRecorderCallbacks {
   onSkillUsed: (skillId: string, trigger: 'file-read' | 'artifact-change') => void;
+  onContextNeeded?: (skill: ChalkSkill) => void;
 }
 
 export class AutoRecorder implements vscode.Disposable {
   private disposables: vscode.Disposable[] = [];
   private cooldowns = new Map<string, number>();
   private skillByPath = new Map<string, string>();
+  private skillById = new Map<string, ChalkSkill>();
   private artifactWatchers: vscode.FileSystemWatcher[] = [];
 
   constructor(
@@ -19,8 +21,10 @@ export class AutoRecorder implements vscode.Disposable {
   setSkills(skills: ChalkSkill[]) {
     // Rebuild path -> skillId lookup
     this.skillByPath.clear();
+    this.skillById.clear();
     for (const skill of skills) {
       this.skillByPath.set(skill.filePath, skill.id);
+      this.skillById.set(skill.id, skill);
     }
 
     // Rebuild artifact watchers
@@ -77,6 +81,14 @@ export class AutoRecorder implements vscode.Disposable {
 
     this.cooldowns.set(skillId, now);
     this.callbacks.onSkillUsed(skillId, trigger);
+
+    // Trigger context assembly if callback registered
+    if (this.callbacks.onContextNeeded) {
+      const skill = this.skillById.get(skillId);
+      if (skill) {
+        this.callbacks.onContextNeeded(skill);
+      }
+    }
   }
 
   private isEnabled(): boolean {

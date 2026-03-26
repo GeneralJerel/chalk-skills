@@ -13,6 +13,13 @@ function parseCommaSeparated(value: string | undefined): string[] {
     .filter(Boolean);
 }
 
+/** Parse a frontmatter field that can be a YAML array or comma-separated string */
+function parseListField(value: unknown): string[] {
+  if (typeof value === 'string') return parseCommaSeparated(value);
+  if (Array.isArray(value)) return value.map(String).filter(Boolean);
+  return [];
+}
+
 function toDisplayName(kebab: string): string {
   return kebab
     .split('-')
@@ -108,6 +115,9 @@ function parseSkillFile(filePath: string, phaseIndex: Map<string, string>): Chal
       phase,
       filePath,
       bodyMarkdown: content,
+      // Context injection fields
+      contextNeeds: parseListField(data['context-needs']),
+      benefitsFrom: parseListField(data['benefits-from']),
     };
   } catch {
     return null;

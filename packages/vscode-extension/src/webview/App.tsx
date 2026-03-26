@@ -4,17 +4,19 @@ import { useSkills } from './hooks/useSkills';
 import { Dashboard } from './components/Dashboard';
 import { SkillInventory } from './components/SkillInventory';
 import { SkillTree } from './components/SkillTree';
+import { SkillCatalog } from './components/SkillCatalog';
 import { LevelUpCinematic } from './components/animations/LevelUpCinematic';
 import { AchievementCeremony } from './components/animations/AchievementCeremony';
 import { postMessage } from './vscode-api';
 
-type Tab = 'dashboard' | 'inventory' | 'skilltree';
+type Tab = 'dashboard' | 'inventory' | 'skilltree' | 'catalog';
 type Theme = 'dark' | 'light';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: '\u{1F3AE}' },
   { id: 'inventory', label: 'Inventory', icon: '\u{1F0CF}' },
   { id: 'skilltree', label: 'Skill Tree', icon: '\u{1F333}' },
+  { id: 'catalog', label: 'Catalog', icon: '\u{1F4E6}' },
 ];
 
 function applyTheme(theme: Theme) {
@@ -169,6 +171,9 @@ export function App() {
           )}
           {activeTab === 'skilltree' && (
             <SkillTree skills={skills} progression={progression} />
+          )}
+          {activeTab === 'catalog' && (
+            <SkillCatalog />
           )}
         </motion.main>
       </AnimatePresence>
