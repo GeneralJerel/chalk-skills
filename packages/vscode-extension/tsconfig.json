@@ -14,5 +14,5 @@
     "declarationMap": false,
     "sourceMap": false
   },
-  "exclude": ["node_modules", "dist", "src/webview"]
+  "exclude": ["node_modules", "dist", "src/webview", "scripts"]
 }

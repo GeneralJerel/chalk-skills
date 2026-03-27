@@ -160,7 +160,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "bundle-skills": "node scripts/bundle-skills.js",
+    "bundle-skills": "ts-node --project scripts/tsconfig.json scripts/bundle-skills.ts",
     "compile": "npm run bundle-skills && webpack --mode production",
     "vscode:prepublish": "npm run clean && npm run compile",
     "watch": "webpack --mode development --watch",
@@ -188,6 +188,7 @@
     "style-loader": "^3.3.4",
     "tailwindcss": "^3.4.1",
     "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "webpack": "^5.90.0",
     "copy-webpack-plugin": "^12.0.2",

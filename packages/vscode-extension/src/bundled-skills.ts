@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as yaml from 'yaml';
 import { ChalkSkill, Rarity, RiskLevel, SkillAnnotations, Phase } from './types';
 
 /**
@@ -131,41 +132,40 @@ export function syncBundledSkillsToWorkspace(rootPath: string): { written: numbe
 
 /**
  * Reconstruct YAML frontmatter from a bundled skill entry.
+ * Uses the yaml library for safe serialization of all values.
  */
 function buildFrontmatter(entry: BundledSkillEntry): string {
-  const lines: string[] = [];
-
-  lines.push(`name: ${entry.id}`);
-  lines.push(`description: ${entry.description}`);
-  lines.push(`author: ${entry.author}`);
-  lines.push(`version: "${entry.version}"`);
-  lines.push(`metadata-version: "${entry.metadataVersion}"`);
+  const frontmatter: Record<string, unknown> = {
+    name: entry.id,
+    description: entry.description,
+    author: entry.author,
+    version: entry.version,
+    'metadata-version': String(entry.metadataVersion),
+    'read-only': entry.annotations.readOnly,
+    destructive: entry.annotations.destructive,
+    idempotent: entry.annotations.idempotent,
+    'open-world': entry.annotations.openWorld,
+    'user-invocable': entry.userInvocable,
+  };
 
   if (entry.allowedTools.length) {
-    lines.push(`allowed-tools: ${entry.allowedTools.join(', ')}`);
+    frontmatter['allowed-tools'] = entry.allowedTools.join(', ');
   }
   if (entry.argumentHint) {
-    lines.push(`argument-hint: "${entry.argumentHint}"`);
+    frontmatter['argument-hint'] = entry.argumentHint;
   }
-
-  lines.push(`read-only: ${entry.annotations.readOnly}`);
-  lines.push(`destructive: ${entry.annotations.destructive}`);
-  lines.push(`idempotent: ${entry.annotations.idempotent}`);
-  lines.push(`open-world: ${entry.annotations.openWorld}`);
-  lines.push(`user-invocable: ${entry.userInvocable}`);
-
   if (entry.tags.length) {
-    lines.push(`tags: ${entry.tags.join(', ')}`);
+    frontmatter.tags = entry.tags.join(', ');
   }
   if (entry.capabilities.length) {
-    lines.push(`capabilities: ${entry.capabilities.join(', ')}`);
+    frontmatter.capabilities = entry.capabilities.join(', ');
   }
   if (entry.riskLevel !== 'unknown') {
-    lines.push(`risk-level: ${entry.riskLevel}`);
+    frontmatter['risk-level'] = entry.riskLevel;
   }
   if (entry.license) {
-    lines.push(`license: ${entry.license}`);
+    frontmatter.license = entry.license;
   }
 
-  return lines.join('\n') + '\n';
+  return yaml.stringify(frontmatter);
 }
